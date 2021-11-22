@@ -9,6 +9,6 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'number of seats', 'number of applied students'];
+    protected $fillable = ['title', 'description', 'seats', 'students'];
     protected $table = 'vacancy';
 }

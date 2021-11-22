@@ -17,8 +17,8 @@ class CreateVacanciesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->integer('number of seats');
-            $table->integer('number of applied students');
+            $table->integer('seats');
+            $table->integer('students');
             $table->timestamps();
         });
     }
