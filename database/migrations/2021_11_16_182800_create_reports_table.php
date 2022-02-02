@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration
             $table->integer('user_id');
             $table->string('text');
             $table->string('link');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
