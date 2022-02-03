@@ -17,8 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::all();
-        return response([ 'posts' => PostResource::collection($post), 'message' => 'Retrieved successfully'], 200);
+        $post = Post::orderBy('created_at', 'desc')->paginate(10);
+        return response(new PostResource($post), 200);
     }
 
     /**
