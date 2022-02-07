@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
@@ -15,10 +18,38 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::orderBy('created_at', 'desc')->paginate(10);
-        return response([  UserResource::collection($user), 'message' => 'Retrieved successfully'], 200);
+        if($request->role == 'student'){
+            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',1)->get();
+            foreach ($whole_id as $id) {
+                $user[] = User::find($id->model_id);
+            }
+            return UserResource::make($user);
+        }if($request->role == 'staff'){
+            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',2)->get();
+            foreach ($whole_id as $id) {
+                $user[] = User::find($id->model_id);
+            }
+            return UserResource::make($user);
+        }
+        if($request->role == 'company'){
+            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',3)->get();
+            foreach ($whole_id as $id) {
+                $user[]  = User::find($id->model_id);                
+            }
+            return UserResource::make($user);
+        }
+        if($request->role == 'admin'){
+            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',4)->get();
+            foreach ($whole_id as $id) {
+                $user[] = User::find($id->model_id);
+            }
+            return UserResource::make($user);
+        }else{
+            $user = User::orderBy('created_at', 'desc')->paginate(10);
+            return response([  UserResource::collection($user), 'message' => 'Retrieved successfully'], 200);
+        }
     }
     
      /**
@@ -42,6 +73,7 @@ class UserController extends Controller
         }
 
         $user = User::create($data);
+        $user->assignRole($request->role);
 
         return response(['users' => new UserResource($user), 'message' => 'Created successfully'], 201);
     }
