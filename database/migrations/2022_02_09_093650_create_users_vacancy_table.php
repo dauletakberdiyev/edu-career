@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVacanciesTable extends Migration
+class CreateUsersVacancyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateVacanciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacancy', function (Blueprint $table) {
+        Schema::create('users_vacancy', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->string('title');
-            $table->text('description');
-            $table->integer('quota');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateVacanciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacancies');
+        Schema::dropIfExists('users_vacancy');
     }
 }
