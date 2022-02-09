@@ -17,38 +17,25 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @urlParam role required The role of the user.
      */
     public function index(Request $request)
     {
         if($request->role == 'student'){
-            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',1)->get();
-            foreach ($whole_id as $id) {
-                $user[] = User::find($id->model_id);
-            }
-            return UserResource::make($user);
-        }if($request->role == 'staff'){
-            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',2)->get();
-            foreach ($whole_id as $id) {
-                $user[] = User::find($id->model_id);
-            }
-            return UserResource::make($user);
-        }
-        if($request->role == 'company'){
-            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',3)->get();
-            foreach ($whole_id as $id) {
-                $user[]  = User::find($id->model_id);                
-            }
-            return UserResource::make($user);
-        }
-        if($request->role == 'admin'){
-            $whole_id=DB::table('model_has_roles')->select('model_id')->where('role_id',4)->get();
-            foreach ($whole_id as $id) {
-                $user[] = User::find($id->model_id);
-            }
-            return UserResource::make($user);
-        }else{
+            $user = User::role('student')->paginate(20);
+            return new UserResource($user);
+        } else if($request->role == 'staff'){
+            $user = User::role('staff')->paginate(20);
+            return new UserResource($user);
+        } else if($request->role == 'company'){
+            $user = User::role('company')->paginate(20);
+            return new UserResource($user);
+        } else if($request->role == 'admin'){
+            $user = User::role('admin')->paginate(20);
+            return new UserResource($user);
+        } else { 
             $user = User::orderBy('created_at', 'desc')->paginate(10);
-            return response([  UserResource::collection($user), 'message' => 'Retrieved successfully'], 200);
+            return new UserResource($user);
         }
     }
     
@@ -57,15 +44,20 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
+     * @urlParam name 
+     * @urlParam email
+     * @urlParam password
+     * @urlParam role
      */
     public function store(Request $request)
     {
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name' => 'required',
-            'name' => 'required',
-            'password' => 'required'
+            'name' => 'required|string',
+            'email' => 'required|unique:users',
+            'password' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -75,7 +67,7 @@ class UserController extends Controller
         $user = User::create($data);
         $user->assignRole($request->role);
 
-        return response(['users' => new UserResource($user), 'message' => 'Created successfully'], 201);
+        return response(new UserResource($user), 201);
     }
     
      /**

@@ -46,4 +46,12 @@ class User extends Authenticatable
     public function reports() {
         return $this->hasMany(Report::class);
     }
+
+    public function vacancies() {
+        return $this->hasMany(Vacancy::class);
+    }
+
+    public function applies() {
+        return $this->belongsToMany(Vacancy::class);
+    }
 }

@@ -13,8 +13,12 @@ class CreateUsersVacancyTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_vacancy', function (Blueprint $table) {
+        Schema::create('user_vacancy', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('vacancy_id')->nullable();
+            $table->string('cv')->nullable();
+            $table->integer('status')->default(0); // 0 - applied, 1 - accepted, 2 - rejected, 3 - registered
             $table->timestamps();
         });
     }
