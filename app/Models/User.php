@@ -23,6 +23,8 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'avatar',
+        'faculty_id',
+        'gender',
         'email',
         'password',
     ];
@@ -56,5 +58,9 @@ class User extends Authenticatable
 
     public function applies() {
         return $this->belongsToMany(Vacancy::class);
+    }
+
+    public function faculty() {
+        return $this->belongsTo(Faculty::class);
     }
 }

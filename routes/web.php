@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/add/user', [App\Http\Controllers\UserController::class, 'store'])->name('user.add');
+Route::post('/update/user', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+
+Route::group(['prefix' => 'staff'], function() {
+    Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff');
+    Route::get('/add', [App\Http\Controllers\StaffController::class, 'add'])->name('staff.add');
+    Route::get('/update/{id}', [App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
+    Route::post('/search', [App\Http\Controllers\StaffController::class, 'search'])->name('staff.search');
+});

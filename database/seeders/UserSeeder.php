@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $gender = ["Male", "Female"];
         //User::factory(100)->create();
         $roles = Role::all('name')->toArray();
         for ($i = 0; $i < 100; $i++) {
@@ -26,6 +27,8 @@ class UserSeeder extends Seeder
                 'lastname' => 'last ' . $i,
                 'email' => 'email' . $i . '@gmail.com',
                 'email_verified_at' => now(),
+                'faculty_id' => rand(1, 3),
+                'gender' => $gender[rand(0,1)],
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             ]);
             
