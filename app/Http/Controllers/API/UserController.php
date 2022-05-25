@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Resources\UserResource;
+use App\Models\User;
 
 
 class UserController extends Controller
@@ -21,6 +23,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->role != Null)
+            $user = User::role($request->role)->paginate(20);
+        else
+            $user = User::orderBy('created_at', 'desc')->paginate(10);
+        return new UserResource($user);
+
         if($request->role == 'student'){
             $user = User::role('student')->paginate(20);
             return new UserResource($user);
@@ -67,6 +75,13 @@ class UserController extends Controller
         $user = User::create($data);
         $user->assignRole($request->role);
 
+        if ($request->hasFile('avatar')) {
+            $filename = $request->avatar->getClientOriginalName();
+            $extension = $request->avatar->getClientOriginalExtension();
+            $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
+            $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+            $user->save();
+        }
         return response(new UserResource($user), 201);
     }
     
@@ -91,7 +106,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-
+        
         return response(['users' => new UserResource($user), 'message' => 'Update successfully'], 200);
     }
 

@@ -15,12 +15,33 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('gender')->nullable()->default(null);
+            $table->string('avatar')->nullable()->default(null);
             $table->string('email')->unique();
-            $table->string('address')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('faculty_id')->nullable()->default(null);
             $table->string('password');
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        // Company profile
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('avatar')->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
+            $table->integer('faculty_id')->nullable()->default(null);
+            $table->integer('user_id');
+            $table->timestamps();
+        });
+
+        // Faculties 
+        Schema::create('faculties', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
