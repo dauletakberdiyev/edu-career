@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -72,7 +73,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response(['error' => $validator->errors(), 'Validation Error']);
         }
-
+        $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
         $user->assignRole($request->role);
 
@@ -83,6 +84,8 @@ class UserController extends Controller
             $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
             $user->save();
         }
+        if ($request->login == 1)
+            return redirect()->route('login');
         return redirect()->back()->with('success', 'User created successfully');
     }
     
@@ -108,6 +111,13 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->update($request->all());
+        if ($request->hasFile('avatar')) {
+            $filename = $request->avatar->getClientOriginalName();
+            $extension = $request->avatar->getClientOriginalExtension();
+            $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
+            $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+            $user->save();
+        }
         
         return redirect()->back()->with('success', 'User updated successfully');
     }

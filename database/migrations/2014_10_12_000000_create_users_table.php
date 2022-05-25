@@ -33,8 +33,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('avatar')->nullable()->default(null);
             $table->string('address')->nullable()->default(null);
-            $table->integer('faculty_id')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
             $table->integer('user_id');
+            $table->boolean('in_whitelist')->default(false);
             $table->timestamps();
         });
 
