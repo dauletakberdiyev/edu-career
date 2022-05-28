@@ -19,14 +19,21 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::post('/add/user', [App\Http\Controllers\UserController::class, 'store'])->name('user.add');
 Route::post('/update/user', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
 
-Route::group(['prefix' => 'staff'], function() {
+Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff');
     Route::get('/add', [App\Http\Controllers\StaffController::class, 'add'])->name('staff.add');
     Route::get('/update/{id}', [App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
     Route::post('/search', [App\Http\Controllers\StaffController::class, 'search'])->name('staff.search');
 });
 
-Route::group(['prefix' => 'company'], function() {
+Route::group(['prefix' => 'student', 'middleware' => ['auth']], function() {
+    Route::get('/', [App\Http\Controllers\StudentController::class, 'index'])->name('student');
+    Route::get('/add', [App\Http\Controllers\StudentController::class, 'add'])->name('student.add');
+    Route::get('/update/{id}', [App\Http\Controllers\StudentController::class, 'update'])->name('student.update');
+    Route::post('/search', [App\Http\Controllers\StudentController::class, 'search'])->name('student.search');
+});
+
+Route::group(['prefix' => 'company', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\CompanyController::class, 'index'])->name('company');
     Route::get('/add', [App\Http\Controllers\CompanyController::class, 'add'])->name('company.add');
     Route::get('/update/{id}', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');

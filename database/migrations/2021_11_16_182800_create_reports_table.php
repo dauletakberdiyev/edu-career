@@ -15,12 +15,18 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('text');
-            $table->string('link');
-            $table->boolean('status')->default(0);
+            $table->text('detail');
+            $table->string('name');
+            $table->date('due_date');
             $table->timestamps();
         });
+
+        Schema::create('reports_users', function (Blueprint $table) {
+            $table->integer('report_id');
+            $table->integer('user_id');
+            $table->timestamps();
+        });
+
     }
 
     /**

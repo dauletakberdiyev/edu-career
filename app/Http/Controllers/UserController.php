@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\Company;
 
 
 class UserController extends Controller
@@ -71,11 +73,32 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Validation Error']);
+            return back()->withErrors($validator);
         }
+
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
         $user->assignRole($request->role);
+        $user->save();
+
+        if ($request->role == "company") {
+            $company = Company::create([
+                'name' => $request->company_name,
+                'description' => $request->company_description,
+                'address' => $request->company_address,
+                'user_id' => $user->id
+            ]);
+        }
+
+        if ($request->hasFile('company_avatar')) {
+            $filename = $request->company_avatar->getClientOriginalName();
+            $extension = $request->company_avatar->getClientOriginalExtension();
+            $request->company_avatar->storeAs('avatars', $company->id . '_co.' . $extension, 'public');
+            $company->avatar = Storage::url('avatars/' . $company->id . '_co.' . $extension);
+            $company->save();
+        }
+
+        
 
         if ($request->hasFile('avatar')) {
             $filename = $request->avatar->getClientOriginalName();
@@ -84,8 +107,11 @@ class UserController extends Controller
             $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
             $user->save();
         }
-        if ($request->login == 1)
-            return redirect()->route('login');
+
+        if ($request->login == 1) {
+            Auth::login($user);
+            return back();
+        }
         return redirect()->back()->with('success', 'User created successfully');
     }
     
@@ -111,6 +137,9 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->update($request->all());
+        $user->roles()->detach();
+        $user->assignRole($request->role);
+        $user->save();
         if ($request->hasFile('avatar')) {
             $filename = $request->avatar->getClientOriginalName();
             $extension = $request->avatar->getClientOriginalExtension();

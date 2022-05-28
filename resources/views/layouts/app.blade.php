@@ -44,7 +44,7 @@
               </button>
     
               <button class="menu__ava" onclick="openInfo(this)">
-                <img src="./images/header/ava.jpg" alt="">
+                <img src="{{ $user->avatar }}" alt="">
               </button>
               <div class="ava__info" id="ava">
                 <div class="profile__info">
@@ -163,7 +163,7 @@
             </li>
 
             <li class="sidebar__item">
-                <a class="sidebar__link" href="/templates/general_pages/manage_students.html">
+                <a class="sidebar__link {{ request()->routeIs(['student', 'student.*']) ? 'active' : '' }}" href="{{ route('student') }}">
           <span class="link__svg">
               <svg id="unig-svg-home" class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
