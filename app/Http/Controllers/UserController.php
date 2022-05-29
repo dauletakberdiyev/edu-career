@@ -137,14 +137,24 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->update($request->all());
-        $user->roles()->detach();
-        $user->assignRole($request->role);
+        if ($request->role != null) {
+            $user->roles()->detach();
+            $user->assignRole($request->role);
+        }
         $user->save();
         if ($request->hasFile('avatar')) {
             $filename = $request->avatar->getClientOriginalName();
             $extension = $request->avatar->getClientOriginalExtension();
             $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
             $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+            $user->save();
+        }
+
+        if ($request->hasFile('cv')) {
+            $filename = $request->cv->getClientOriginalName();
+            $extension = $request->cv->getClientOriginalExtension();
+            $request->cv->storeAs('cv', $user->id . '.' . $extension, 'public');
+            $user->cv = Storage::url('cv/' . $user->id . '.' . $extension);
             $user->save();
         }
         
@@ -164,4 +174,11 @@ class UserController extends Controller
         return response(['message' => 'Deleted']);
     }
 
+    public function profile_edit() {
+        return view('profile.edit');
+    }
+
+    public function profile() {
+        return view('profile.display');
+    }
 }

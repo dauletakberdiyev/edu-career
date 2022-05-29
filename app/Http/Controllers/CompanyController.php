@@ -37,10 +37,11 @@ class CompanyController extends Controller
         $company = Company::find($request->id);
         $company->update($request->all());
 
-        if ($request->hasFile('avatar')) {
-            $filename = $request->avatar->getClientOriginalName();
-            $extension = $request->avatar->getClientOriginalExtension();
-            $request->avatar->storeAs('avatars', $company->id . '.' . $extension, 'public');
+
+        if ($request->hasFile('company_avatar')) {
+            $filename = $request->company_avatar->getClientOriginalName();
+            $extension = $request->company_avatar->getClientOriginalExtension();
+            $request->company_avatar->storeAs('avatars', $company->id . '.' . $extension, 'public');
             $company->avatar = Storage::url('avatars/' . $company->id . '.' . $extension);
             $company->save();
         }
@@ -53,5 +54,19 @@ class CompanyController extends Controller
                                             where('email', 'like', '%' . $request->search . '%')
                                             ->paginate(10);
         return view('company.manage')->with(['users' => $users]);
+    }
+
+    public function approve(Request $request) {
+        $company = Company::find($request->company_id);
+        $company->in_whitelist = 1;
+        $company->save();
+        return response()->json(['message' => 'Company approved successfully']);
+    }
+
+    public function reject(Request $request) {
+        $company = Company::find($request->company_id);
+        $company->in_whitelist = 0;
+        $company->save();
+        return response()->json(['message' => 'Company unapproved successfully']);
     }
 }

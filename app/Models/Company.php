@@ -19,4 +19,12 @@ class Company extends Model
     public function faculty() {
         return $this->belongsTo(Faculty::class);
     }
+
+    public function vacancies() {
+        return $this->hasMany(Vacancy::class);
+    }
+
+    public function applicants() {
+        return $this->belongsToMany(User::class, 'user_vacancy', 'company_id', 'user_id')->withPivot('status');
+    }
 }

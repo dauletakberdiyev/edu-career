@@ -9,6 +9,14 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'quota'];
+    protected $fillable = ['title', 'description', 'quota', 'company_id'];
     protected $table = 'vacancy';
+
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function applicants() {
+        return $this->belongsToMany(User::class, 'user_vacancy', 'vacancy_id', 'user_id')->withPivot('status');
+    }
 }

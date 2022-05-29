@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use Spatie\Permission\Models\Role;
+use App\Models\Company;
 
 
 class VacancyFactory extends Factory
@@ -26,12 +27,12 @@ class VacancyFactory extends Factory
      */
     public function definition()
     {
-        $companies = User::role('company')->get('id')->toArray();
+        $companies = Company::get('id')->toArray();
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'quota' => $this->faker->numberBetween(1, 10),
-            'user_id' => $this->faker->randomElement($companies)['id'],
+            'company_id' => $this->faker->randomElement($companies)['id'],
         ];
     }
 }

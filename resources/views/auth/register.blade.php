@@ -97,7 +97,7 @@
                     <input class="form-control-file" name="company_avatar" id="company_avatar" type="file" hidden="">
                     <div class="choose_btn registration_choose_btn">
                         <!-- our custom upload button -->
-                        <label for="actual-btn-co">Choose company logo</label>
+                        <label for="company_avatar">Choose company logo</label>
                         <!-- name of file chosen -->
                         <span id="file-chosen_co">No Picture chosen</span>
                     </div>

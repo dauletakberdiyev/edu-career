@@ -7,6 +7,9 @@
 <main class="main">
         <div class="container-fluid">
           <div class="page__inner">
+            <div class="d-flex justify-content-between mb-4">
+                <a href="{{ route('vacancy', ['id' => $company->id]) }}" class="btn btn-outline-primary">Vacancies</a>
+            </div>
             <div class="main__title mb-3">{{ $company->name }}</div>
         
             <div class="d-flex align-items-center mb-4">

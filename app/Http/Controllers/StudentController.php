@@ -33,4 +33,9 @@ class StudentController extends Controller
                                             ->paginate(10);
         return view('student.manage')->with(['users' => $users]);
     }
+
+    public function profile($id) {
+        $user = User::find($id);
+        return view('student.profile')->with(['user' => $user]);
+    }
 }
