@@ -70,6 +70,14 @@
                         @csrf
                         <input name="id" type="hidden" value="{{ $company->id }}">
                         <div class="fill-group">
+                          <label class="mb-0">Status</label>
+                            @if($company->in_whitelist)
+                            <span class="flex9 text-success">Whitelisted</span>
+                            @else
+                            <span class="flex9 text-primary">Not whitelisted</span>
+                            @endif
+                        </div>
+                        <div class="fill-group">
                             <label>Name</label>
                             <input type="text" class="form-control" placeholder="Enter Name" name="name" v-model="firstName" value="{{ $company->name }}">
                         </div>

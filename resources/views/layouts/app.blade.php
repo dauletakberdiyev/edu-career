@@ -114,6 +114,19 @@
 								Home
 							</a>
 						</li>
+            <li class="sidebar__item">
+							<a class="sidebar__link {{ request()->routeIs('profile') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
+                <span class="link__svg">
+													<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="CogIcon">
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+															<path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+														</svg>
+													</svg>
+												</span>
+                        Edit Profile
+							</a>
+						</li>
+            @role('admin')
 						<li class="sidebar__item">
 							<a class="sidebar__link {{ request()->routeIs(['staff', 'staff.*']) ? 'active' : '' }}" href="{{ route('staff') }}">
 								<span class="link__svg">
@@ -137,6 +150,18 @@
 								Manage staff
 							</a>
 						</li>
+            <li class="sidebar__item">
+							<a href="{{ route('registration.manage') }}" class="sidebar__link">
+								<span class="link__svg">
+									<svg height="512pt" viewBox="0 -20 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+										<path d="m119 161c-22.054688 0-40 17.945312-40 40v151c0 22.054688 17.945312 40 40 40h76c22.054688 0 40-17.945312 40-40v-151c0-22.054688-17.945312-40-40-40zm76 191h-76v-151h76l.023438 151s-.003907 0-.023438 0zm236-75c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0 76c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0-152c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm21-201h-392c-33.085938 0-60 26.914062-60 60v332c0 44.113281 35.886719 80 80 80h352c44.113281 0 80-35.886719 80-80 0-11.046875-8.953125-20-20-20s-20 8.953125-20 20c0 22.054688-17.945312 40-40 40h-352c-22.054688 0-40-17.945312-40-40v-271h432v171c0 11.046875 8.953125 20 20 20s20-8.953125 20-20v-232c0-33.085938-26.914062-60-60-60zm-81 40c11.027344 0 20 8.972656 20 20s-8.972656 20-20 20-20-8.972656-20-20 8.972656-20 20-20zm100 20c0 11.027344-8.972656 20-20 20s-20-8.972656-20-20 8.972656-20 20-20 20 8.972656 20 20zm-431 0c0-11.027344 8.972656-20 20-20h254.441406c-2.222656 6.261719-3.441406 12.988281-3.441406 20 0 7.386719 1.347656 14.460938 3.800781 21h-274.800781zm0 0"></path>
+									</svg>
+								</span>
+								Manage registration
+							</a>
+						</li>
+            @endrole
+            @role('admin|staff')
 						<li class="sidebar__item">
 							<a class="sidebar__link {{ request()->routeIs(['company', 'company.*']) ? 'active' : '' }}" href="{{ route('company') }}">
 								<span class="link__svg">
@@ -161,6 +186,7 @@
 								Manage student
 							</a>
 						</li>
+            @endrole
             @role('company')
             @php 
               $company = Auth::user()->company;
@@ -187,9 +213,25 @@
 										<path d="M6 8a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6Z"/>
 									</svg>
 								</span>
-								Vacancies
+								All vacancies
 							</a>
 						</li>
+            @role('admin|student')
+            <li class="sidebar__item">
+							<a class="sidebar__link" href="{{ route('registration') }}">
+								<span class="link__svg">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-minus" viewBox="0 0 16 16">
+										<path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+										<path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+										<path d="M6 8a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6Z"/>
+									</svg>
+								</span>
+								Registration
+							</a>
+						</li>
+            @endrole
+            
+            <!--
 						<li class="sidebar__item">
 							<a class="sidebar__link" href="/templates/general_pages/manage_report.html">
 								<span class="link__svg">
@@ -208,16 +250,6 @@
 									</svg>
 								</span>
 								Manage report
-							</a>
-						</li>
-						<li class="sidebar__item">
-							<a href="{{ route('registration') }}" class="sidebar__link">
-								<span class="link__svg">
-									<svg height="512pt" viewBox="0 -20 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-										<path d="m119 161c-22.054688 0-40 17.945312-40 40v151c0 22.054688 17.945312 40 40 40h76c22.054688 0 40-17.945312 40-40v-151c0-22.054688-17.945312-40-40-40zm76 191h-76v-151h76l.023438 151s-.003907 0-.023438 0zm236-75c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0 76c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0-152c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm21-201h-392c-33.085938 0-60 26.914062-60 60v332c0 44.113281 35.886719 80 80 80h352c44.113281 0 80-35.886719 80-80 0-11.046875-8.953125-20-20-20s-20 8.953125-20 20c0 22.054688-17.945312 40-40 40h-352c-22.054688 0-40-17.945312-40-40v-271h432v171c0 11.046875 8.953125 20 20 20s20-8.953125 20-20v-232c0-33.085938-26.914062-60-60-60zm-81 40c11.027344 0 20 8.972656 20 20s-8.972656 20-20 20-20-8.972656-20-20 8.972656-20 20-20zm100 20c0 11.027344-8.972656 20-20 20s-20-8.972656-20-20 8.972656-20 20-20 20 8.972656 20 20zm-431 0c0-11.027344 8.972656-20 20-20h254.441406c-2.222656 6.261719-3.441406 12.988281-3.441406 20 0 7.386719 1.347656 14.460938 3.800781 21h-274.800781zm0 0"></path>
-									</svg>
-								</span>
-								Manage registration
 							</a>
 						</li>
 						<li class="sidebar__item">
@@ -273,6 +305,7 @@
 								Feedback reply
 							</a>
 						</li>
+-->
 					</ul>
 					<!--  SideBar menu  -->
 				</div>

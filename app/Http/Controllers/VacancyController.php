@@ -71,6 +71,14 @@ class VacancyController extends Controller
         return response()->json(['message' => 'You have applied successfully']);
     }
 
+    public function reject_application(Request $request) {
+        $vacancy = Vacancy::find($request->vacancy_id);
+        $vacancy->applicants()->detach($request->user_id);
+        $vacancy->save();
+
+        return response()->json(['message' => 'You have canceled successfully']);
+    }
+
 
     public function approve(Request $request) {
         $vacancy = Vacancy::find($request->vacancy_id);

@@ -13,12 +13,18 @@
           <div class="page__inner">
             <div class="page__top">
                 <h3 class="page__title">{{ $vacancy->title }}</h3>
+                <br>
                 @role('student')
+                  @if($vacancy->applicants()->where('user_id', $user->id)->first() != null)
+                    <button class="flex btn btn-outline-warning" onclick="cancelVacancy()">Cancel application</button>
+                  @else
                   @if($vacancy->quota > 0)
-                    <button class="btn btn-outline-primary" onclick="applyVacancy()">Apply</button>
+                    <button class="flex btn btn-outline-info" onclick="applyVacancy()">Apply</button>
+                  @endif
                   @endif
                 @endrole
-                <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
+                
+                <a class="flex btn btn-outline-primary" href="{{ route('vacancy.index') }}">Back</a>
             </div>
         
             <div class="form-group group-profile">
@@ -157,12 +163,37 @@
         },
         success: function(data) {
           alert(data['message']);
+          window.location.reload();
         },
         error: function(data) {
           alert(data['message']);
         }
       });
     };
+
+    function cancelVacancy() {
+      var vacancyId = {{ $vacancy->id }};
+      var userId = {{ $user->id }};
+      
+      
+      $.ajax({
+        url: '{{ route("vacancy.reject.application") }}',
+        type: 'POST',
+        data: {
+          "_token": "{{ csrf_token() }}",
+          vacancy_id: vacancyId,
+          user_id: userId
+        },
+        success: function(data) {
+          alert(data['message']);
+          window.location.reload();
+        },
+        error: function(data) {
+          alert(data['message']);
+        }
+      });
+    };
+
     function changeStatus(status) {
       var $item = $(this).closest("input").val();
       console.log($item);

@@ -58,6 +58,14 @@
               <img src="{{ $company->avatar }}" width="80" height="80" class="profile-img">
             </div>
             <div class="form-group group-profile">
+              <label class="mb-0">Status</label>
+                @if($company->in_whitelist)
+                <span class="flex9 text-success">Whitelisted</span>
+                @else
+                <span class="flex9 text-primary">Not whitelisted</span>
+                @endif
+            </div>
+            <div class="form-group group-profile">
               <label class="mb-0">Name</label>
                 <span class="flex9 text-secondary">
                     {{ $company->name }}

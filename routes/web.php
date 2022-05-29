@@ -46,7 +46,8 @@ Route::group(['prefix' => 'company', 'middleware' => ['auth']], function() {
     Route::post('/updateform', [App\Http\Controllers\CompanyController::class, 'update_form'])->name('company.update.form');
     Route::post('/search', [App\Http\Controllers\CompanyController::class, 'search'])->name('company.search');
     Route::get('/{id}', [App\Http\Controllers\CompanyController::class, 'detail'])->name('company.detail');
-
+    
+    Route::post('/addform', [App\Http\Controllers\CompanyController::class, 'add_form'])->name('company.add.form');
     Route::post('/approve', [App\Http\Controllers\CompanyController::class, 'approve'])->name('company.approve');
     Route::post('/reject', [App\Http\Controllers\CompanyController::class, 'reject'])->name('company.reject');
 });
@@ -64,6 +65,7 @@ Route::group(['prefix' => 'vacancy', 'middleware' => ['auth']], function() {
     Route::post('/search', [App\Http\Controllers\VacancyController::class, 'search'])->name('vacancy.search');
 
     Route::post('/apply', [App\Http\Controllers\VacancyController::class, 'apply'])->name('vacancy.apply');
+    Route::post('/reject', [App\Http\Controllers\VacancyController::class, 'reject_application'])->name('vacancy.reject.application');
 
     Route::post('/applicant/approve', [App\Http\Controllers\VacancyController::class, 'approve'])->name('vacancy.approve');
     Route::post('/applicant/reject', [App\Http\Controllers\VacancyController::class, 'reject'])->name('vacancy.reject');
@@ -72,4 +74,8 @@ Route::group(['prefix' => 'vacancy', 'middleware' => ['auth']], function() {
 
 Route::group(['prefix' => 'registration', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration');
+    Route::get('/manage', [App\Http\Controllers\RegistrationController::class, 'manage'])->name('registration.manage');
+    Route::post('/confirm', [App\Http\Controllers\RegistrationController::class, 'confirm'])->name('registration.confirm');
+    Route::post('/reject', [App\Http\Controllers\RegistrationController::class, 'reject'])->name('registration.reject');
+    Route::post('/pending', [App\Http\Controllers\RegistrationController::class, 'pending'])->name('registration.pending');
 });

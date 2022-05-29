@@ -62,7 +62,7 @@
                             <thead>
                                 <tr>
                                   <th>Student</th>
-                                  <th>SDU ID</th>
+                                  <th>SDU email</th>
                                   <th>Supervisor</th>
                                   <th>Beta type</th>
                                   <th>Agreement</th>
@@ -72,21 +72,48 @@
                                 </tr>
                             </thead>
                             <tbody class="text-dark">
+                                @foreach($registrations as $reg)
                                 <tr>
-                                    <td>{{ info.student }}</td>
-                                    <td>{{ info.sduID }}</td>
-                                    <td>{{ info.supervisor }}</td>
-                                    <td>{{ info.betaType }}</td>
+                                    <td>{{ $reg->user->firstname }} {{ $reg->user->lastname }}</td>
+                                    <td>{{ $reg->user->email }}</td>
+                                    <td>{{ $reg->vacancy->company->user->email }}</td>
                                     <td>
-                                      <a href="#">Download</a>
+                                        @if($reg->vacancy->type == 0)
+                                            Industrial
+                                        @else
+                                            Academic
+                                        @endif
                                     </td>
-                                    <td>{{ info.status }}</td>
                                     <td>
-                                      <button class="btn btn-outline-primary btn-table">
-                                        Cancel approve
-                                      </button>
+                                      <a href="{{ $reg->agreement }}" download>Download</a>
+                                    </td>
+                                    <td>
+                                        @if($reg->status == 0)
+                                            <span class=" text-warning">Pending</span>
+                                        @elseif($reg->status == 1)
+                                            <span class=" text-success">Approved</span>
+                                        @elseif($reg->status == 2)
+                                            <span class=" text-danger">Rejected</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($reg->status != 1)
+                                        <button class="btn btn-success btn-sm changeStatus" reg_id="{{ $reg->id }}" status=1>
+                                            Confirm
+                                        </button>
+                                        @endif
+                                        @if($reg->status != 2)
+                                        <button class="btn btn-danger btn-sm changeStatus" reg_id="{{ $reg->id }}"  status=2>
+                                            Reject
+                                        </button>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <textarea type="text" id="{{ $reg->id }}_reason" name="reason" placeholder="Write the reason">
+                                        </textarea>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -113,4 +140,39 @@
                 </div>
             </div>
         </main>
+@endsection
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script> 
+    $(".changeStatus").on('click', function(event){
+      var reg_id = $(this).attr('reg_id');
+      var status = $(this).attr('status');
+      var reason = $("#"+reg_id+"_reason").val();
+
+      var url = "";
+      if(status == 1) {
+        url = "{{ route('registration.confirm') }}";
+      } else if(status == 2) {
+        url = "{{ route('registration.reject') }}";
+      } else {
+        url = "{{ route('registration.pending') }}";
+      }
+
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+          "_token": "{{ csrf_token() }}",
+          registration_id: reg_id,
+          reason: reason
+        },
+        success: function(data) {
+          window.location.reload();
+        },
+        error: function(data) {
+          alert(data['message']);
+        }
+      });
+    });
+  </script>
 @endsection

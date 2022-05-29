@@ -33,6 +33,28 @@ class CompanyController extends Controller
         return view('company.update')->with(['company' => $company]);
     }
 
+    public function add_form(Request $request) {
+        $company = new Company();
+        $company->name = $request->name;
+        $company->address = $request->address;
+        $company->user_id = $request->user_id;
+        $company->description = $request->description;
+        $company->save();
+
+        $user = User::find($request->user_id);
+        $user->assignRole('company');
+
+        if ($request->hasFile('avatar')) {
+            $filename = $request->avatar->getClientOriginalName();
+            $extension = $request->avatar->getClientOriginalExtension();
+            $request->avatar->storeAs('avatars', $company->id . '_co.' . $extension, 'public');
+            $company->avatar = Storage::url('avatars/' . $company->id . '_co.' . $extension);
+            $company->save();
+        }
+
+        return redirect()->back()->with('success', 'Company added successfully');
+    }
+
     public function update_form(Request $request) {
         $company = Company::find($request->id);
         $company->update($request->all());

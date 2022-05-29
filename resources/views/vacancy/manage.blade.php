@@ -6,8 +6,9 @@
           <div class="page__inner">
             <div class="page__top flex-wrap">
               <h3 class="page__title">Vacancies</h3>
-              
+              @role('admin|company|staff')
               <a class="btn btn-outline-primary" href="{{ route('vacancy.add') }}">Add vacancy</a>
+              @endrole
             </div>
           
             <form method="POST" class="search-group" action="{{ route('vacancy.search') }}">
@@ -29,7 +30,10 @@
                     <th>Name</th>
                     <th>Quota</th>
                     <th>Type</th>
+                    <th>Applicants</th>
+                    @role('admin|company|staff')
                     <th>Action</th>
+                    @endrole
                   </tr>
                   </thead>
                   <tbody class="text-dark">
@@ -54,6 +58,10 @@
                           @endif
                         </td>
                         <td>
+                          {{ $vacancy->applicants()->count() }}
+                        </td>
+                        @role('admin|company|staff')
+                        <td>
                             <a href="{{ route('vacancy.edit', ['id' => $vacancy->id]) }}" class="table-tool" @click.prevent="editcompany">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="528.899px" height="528.899px" viewBox="0 0 528.899 528.899" style="enable-background:new 0 0 528.899 528.899;" xml:space="preserve" fill="#212529">
                                     <g>
@@ -70,6 +78,7 @@
                             </a>
 -->
                          </td>
+                         @endrole
                       </tr>
                       @endforeach
                   </tbody>

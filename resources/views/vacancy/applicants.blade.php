@@ -23,15 +23,15 @@
                 <table class="table main-table">
                   <thead>
                   <tr>
-                    <th>Company</th>
-                    <th>Name</th>
-                    <th>Quota</th>
-                    <th>Type</th>
+                    <th>Vacancy</th>
+                    <th>Student</th>
+                    <th>Email</th>
+                    <th>CV</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody class="text-dark">
-                    @foreach($vacancies as $vacancy)
+                    @foreach($applicants as $application)
                       <tr>
                         <td> 
                           <a href="{{ route('company.detail', ['id'=>$company->id]) }}" >

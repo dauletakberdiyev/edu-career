@@ -10,7 +10,7 @@
                         <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
                     </div>
 
-                    <form action="{{ route('company.add') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('company.add.form') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="fill-group">
                             <label>Name</label>
@@ -28,7 +28,7 @@
 
                         <div class="fill-group">
                             <label>User</label>
-                            <select name="faculty_id" id="faculty">
+                            <select name="user_id" id="faculty">
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->email }}</option>
                                 @endforeach
