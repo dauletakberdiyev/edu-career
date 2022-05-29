@@ -16,7 +16,8 @@ class Registration extends Model
         'agreement',
         'reason',
         'type',
-        'status'
+        'status',
+        'term_id',
     ];
 
     public function user() {

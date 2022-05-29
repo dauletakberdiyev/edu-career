@@ -85,16 +85,15 @@
                                 @endforeach
                             </select>
                         </div>
-
+                        @if($registration->status != 1)
                         <div class="fill-group">
                             <label>Agreement</label>
                             <input type="file" name="agreement" class="form-control-file" accept="pdf, doc, docx" required>
                         </div>
-
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-outline-primary ml-auto align-items-center" @click.prevent="submitStaff">Send</button>
                         </div>
-
+                        @endif
                     </form>
                 </div>
             </div>

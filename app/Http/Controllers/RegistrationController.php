@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Vacancy;
 use App\Models\Registration;
+use App\Models\Term;
 
 class RegistrationController extends Controller
 {
@@ -35,6 +36,7 @@ class RegistrationController extends Controller
         $registration->vacancy_id = $vacancy->id;
         $registration->type = $vacancy->type;
         $registration->status = 0;
+        $registration->term_id = Term::where('active', '=', 1)->first()->id;
         $registration->save();
 
         if ($request->hasFile('agreement')) {

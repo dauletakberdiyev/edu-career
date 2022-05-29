@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             VacnacySeeder::class,
             FacultySeeder::class,
+            TermSeeder::class,
         ]);
     }
 }

@@ -79,3 +79,9 @@ Route::group(['prefix' => 'registration', 'middleware' => ['auth']], function() 
     Route::post('/reject', [App\Http\Controllers\RegistrationController::class, 'reject'])->name('registration.reject');
     Route::post('/pending', [App\Http\Controllers\RegistrationController::class, 'pending'])->name('registration.pending');
 });
+
+Route::group(['prefix' => 'term', 'middleware' => ['auth']], function() {
+    Route::get('/edit', [App\Http\Controllers\TermController::class, 'edit'])->name('term.edit');
+
+    Route::post('/update', [App\Http\Controllers\TermController::class, 'update'])->name('term.update');
+});

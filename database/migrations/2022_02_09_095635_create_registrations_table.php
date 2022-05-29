@@ -17,6 +17,7 @@ class CreateRegistrationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('vacancy_id')->nullable();
+            $table->foreignId('term_id')->nullable();
             $table->string('agreement')->nullable();
             $table->text('reason')->nullable();
             $table->integer('type')->default(0); // 0 - industrial, 1 - academic
