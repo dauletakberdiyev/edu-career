@@ -29,6 +29,10 @@ class VacancyController extends Controller
     }
 
     public function add_form(Request $request) {
+        $company = Company::find($request->company_id);
+        if ($company->in_whitelist == 0) {
+            return redirect()->back()->with('error', 'Company not in whitelist');
+        }
         $vacancy = new Vacancy();
         $vacancy->title = $request->title;
         $vacancy->description = $request->description;

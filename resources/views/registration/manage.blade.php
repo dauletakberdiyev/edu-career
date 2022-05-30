@@ -10,15 +10,6 @@
 <!--                        <a class="btn btn-outline-primary">Add Report</a>-->
                     </div>
 
-                    <form method="get" class="search-form col-lg-6">
-                        <div class="form-group">
-                            <label>Choose end of registration date:</label>
-                            <div class="block-search">
-                                <input type="datetime-local" class="form-control" name="expiry_date" value="2021-09-20T12:30">
-                                <button class="btn btn-outline-primary registration-save-btn">Save date</button>
-                            </div>
-                        </div>
-                    </form>
 
                     <form method="get">
                         <div class="d-flex registration-forms search-second">
