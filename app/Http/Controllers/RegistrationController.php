@@ -16,7 +16,8 @@ class RegistrationController extends Controller
     public function index() {
         $user = Auth::user();
         $vacancies = $user->applies()->wherePivot('status', '=', 1)->get();
-        return view('registration.index')->with(['vacancies' => $vacancies]);
+        $term = Term::where('active', '=', 1)->first();
+        return view('registration.index')->with(['vacancies' => $vacancies, 'term' => $term]);
     }
 
     public function manage() {
@@ -27,6 +28,13 @@ class RegistrationController extends Controller
     public function pending(Request $request) {
         $user = User::find($request->user_id);
         $vacancy = Vacancy::find($request->vacancy_id);
+        $term = Term::where('active', '=', 1)->first();
+
+        if ($term->registration_end < date('Y-m-d')) {
+            return redirect()->back()->with('error', 'Registration period has ended');
+        }
+        
+
         if ($user->registration != null)
             $registration = $user->registration;
         else

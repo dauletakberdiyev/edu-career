@@ -10,10 +10,11 @@
                 <div class="page__inner">
                     <div class="page__top">
                         <h3 class="page__title">Beta registration</h3>
-                        
+                        <h3 class="flex9 text-info">   Registration end: {{ $term->registration_end }}</h3>
 
                         <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
                     </div>
+                    
                     <h5 class="page__title">
                             Status: 
                             @if($registration != null)
@@ -85,7 +86,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        @if($registration->status != 1)
+                        @if($registration != null && $registration->status != 1)
                         <div class="fill-group">
                             <label>Agreement</label>
                             <input type="file" name="agreement" class="form-control-file" accept="pdf, doc, docx" required>
