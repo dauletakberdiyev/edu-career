@@ -15,7 +15,10 @@
                 <h3 class="page__title">{{ $vacancy->title }}</h3>
                 <br>
                 @role('student')
-                  @if($vacancy->applicants()->where('user_id', $user->id)->first() != null)
+                  @php 
+                    $applicant = $vacancy->applicants()->where('user_id', $user->id)->first()
+                  @endphp
+                  @if($applicant != null)
                     <button class="flex btn btn-outline-warning" onclick="cancelVacancy()">Cancel application</button>
                   @else
                   @if($vacancy->quota > 0)

@@ -6,7 +6,7 @@
           <div class="page__inner">
             <div class="page__top flex-wrap">
               <h3 class="page__title">Vacancies</h3>
-              @role('admin|company|staff')
+              @role('admin|company|coordinator|teacher')
               <a class="btn btn-outline-primary" href="{{ route('vacancy.add') }}">Add vacancy</a>
               @endrole
             </div>

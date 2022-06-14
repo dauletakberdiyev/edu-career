@@ -43,10 +43,11 @@
                         </td>
                         <td>{{ $company->user->email }}</td>
                         <td>{{ $company->address }}</td>
-                        <td>{{ $company->user->faculty->name }}</td>
+                        <td></td>
                         <td>
                             <img src="{{ $company->avatar }}" alt="default__img" class="table__img">
                         </td>
+                        @role('admin')
                         <td>
                             <a href="{{ route('company.update', ['id' => $company->id]) }}" class="table-tool" @click.prevent="editcompany">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="528.899px" height="528.899px" viewBox="0 0 528.899 528.899" style="enable-background:new 0 0 528.899 528.899;" xml:space="preserve" fill="#212529">
@@ -68,6 +69,7 @@
                               </button>
                             @endif
                          </td>
+                         @endrole
                       </tr>
                       @endforeach
                   </tbody>

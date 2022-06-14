@@ -90,6 +90,14 @@ class UserController extends Controller
             ]);
         }
 
+        if ($request->role == "teacher") {
+            $company = Company::create([
+                'name' => 'SDU',
+                'address' => 'Kaskelen, Abylaikhan 1/1',
+                'user_id' => $user->id
+            ]);
+        }
+
         if ($request->hasFile('company_avatar')) {
             $filename = $request->company_avatar->getClientOriginalName();
             $extension = $request->company_avatar->getClientOriginalExtension();

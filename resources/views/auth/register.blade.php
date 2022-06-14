@@ -25,7 +25,7 @@
                 <option value="" disabled="" selected="">Select your position</option>
                 <option value="student">Student</option>
                 <option value="company">Company</option>
-                <option value="coordinator">Coordinator</option>
+                <option value="teacher">Teahcer</option>
               </select>
             </div>
             @php 
@@ -33,7 +33,7 @@
                 $faculties = Faculty::all();
             @endphp
             <div class="form-group registration_group">
-              <select name="faculty_id" class="form-control" id="user_faculty" onchange="" required="">
+              <select name="faculty_id" class="form-control" id="user_faculty" onchange="">
                 <option value="" disabled="" selected="">Select your faculty</option>
                 @foreach($faculties as $faculty)
                     <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
@@ -121,8 +121,12 @@
     <script>
         window.onload = function() {
             document.getElementById("company_profile").style.display = "none";
+            document.getElementById("user_faculty").required = true;
         };
         function showCompanyFields() {
+            document.getElementById("user_faculty").style.display = "none";
+            document.getElementById("user_faculty").required = false;
+
             optionVal = document.getElementById("user_type").value;
             var email = document.getElementById('email_input');
             var co_name = document.getElementById('company_name');
@@ -148,9 +152,13 @@
             } else if (optionVal == "student") {
                 email.setAttribute('pattern', "\\d{9}@stu\\.sdu\\.edu\\.kz");
                 email.setAttribute('title', 'Please use your student email (Ex. 200103022@stu.sdu.edu.kz)')
-
+                
+                document.getElementById("user_faculty").required = true;
+                document.getElementById("user_faculty").style.display = "";
                 document.getElementById("company_profile").style.display = "none";
             } else {
+              document.getElementById("user_faculty").required = true;
+              document.getElementById("user_faculty").style.display = "";
                 document.getElementById("company_profile").style.display = "none";
             }
         }

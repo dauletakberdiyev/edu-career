@@ -78,6 +78,8 @@ Route::group(['prefix' => 'registration', 'middleware' => ['auth']], function() 
     Route::post('/confirm', [App\Http\Controllers\RegistrationController::class, 'confirm'])->name('registration.confirm');
     Route::post('/reject', [App\Http\Controllers\RegistrationController::class, 'reject'])->name('registration.reject');
     Route::post('/pending', [App\Http\Controllers\RegistrationController::class, 'pending'])->name('registration.pending');
+
+    Route::get('agreement', [App\Http\Controllers\RegistrationController::class, 'download_agreement'])->name('registration.getagreement');
 });
 
 Route::group(['prefix' => 'term', 'middleware' => ['auth']], function() {

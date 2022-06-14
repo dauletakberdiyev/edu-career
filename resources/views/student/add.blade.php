@@ -29,23 +29,9 @@
                             <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname" v-model="lastName">
                         </div>
 
-                        <div class="fill-group">
-                            <label>Faculty</label>
-                            <select name="faculty_id" id="faculty">
-                                @foreach($faculties as $faculty)
-                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="fill-group">
-                            <label>Role</label>
-                            <select name="role" id="role">
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <input hidden name="faculty_id" value='{{ Auth::user()->faculty->id }}'>
+                        <input hidden name='role' value='student'>
+                        
 
                         <div class="fill-group">
                             <label>Gender</label>

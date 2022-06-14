@@ -16,7 +16,13 @@ class FacultySeeder extends Seeder
      */
     public function run()
     {
-        $names = ['Computer Science', 'Information Systems', 'Economy'];
+        $names = ['Computer Science', 'Information Systems', 'Mathematics', 
+    'Mathematical and Computer Modelling',
+    'Law faculty',
+    'Халықаралық қатынастар',
+    'Халықаралық құқық',
+    'Қолданбалы құқық',
+    ];
 
         foreach ($names as $name) {
             Faculty::create(['name' => $name]);

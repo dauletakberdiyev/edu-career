@@ -33,6 +33,7 @@ class VacancyFactory extends Factory
             'description' => $this->faker->paragraph,
             'quota' => $this->faker->numberBetween(1, 10),
             'company_id' => $this->faker->randomElement($companies)['id'],
+            'faculty_id' => rand(1, 8),
         ];
     }
 }

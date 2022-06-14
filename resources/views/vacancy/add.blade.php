@@ -10,8 +10,12 @@
                         <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
                     </div>
 
+                    @php 
+                        $company = Auth::user()->company;
+                    @endphp 
+                    @if($company->in_whitelist == 1)
                     <form action="{{ route('vacancy.add.form') }}" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="company_id" value="{{ Auth::user()->company->id }}">
+                        <input type="hidden" name="company_id" value="{{ $company->id }}">
                         @csrf
                         <div class="fill-group">
                             <label>Name</label>
@@ -26,18 +30,14 @@
                             <textarea type="text" class="form-control" placeholder="Enter description" name="description" v-model="lastName" required>
                             </textarea>
                         </div>
+
                         <div class="fill-group">
-                            <label>Type</label>
-                            <div class="d-flex">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" name="type" class="custom-control-input" checked="" value="0" v-model="gender">
-                                    <label class="custom-control-label">Industrial</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" name="type" class="custom-control-input" value="1" v-model="gender">
-                                    <label class="custom-control-label">Academic</label>
-                                </div>
-                            </div>
+                            <label>Faculty</label>
+                            <select name="faculty_id" id="faculty">
+                                @foreach($faculties as $faculty)
+                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="d-flex justify-content-end">
@@ -45,6 +45,9 @@
                         </div>
 
                     </form>
+                    @else 
+                    <span class="text-info">Company is not in white list. Please contact to your coordinator</span>
+                    @endif
                 </div>
             </div>
         </main>

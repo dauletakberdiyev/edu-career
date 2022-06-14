@@ -19,6 +19,7 @@ class CreateVacanciesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('quota');
+            $table->integer('faculty_id')->nullable()->default(null);
             $table->integer('type')->default(0); // 0 - industrial, 1 - academic
             $table->timestamps();
         });

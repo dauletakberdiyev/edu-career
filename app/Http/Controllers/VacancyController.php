@@ -3,14 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Company;
 use App\Models\Vacancy;
+use App\Models\Faculty;
 
 class VacancyController extends Controller
 {
     //
     public function index() {
-        $vacancies = Vacancy::paginate(10);
+        $user = Auth::user();
+        if ($user->hasRole('admin'))
+            $f_id = [1,2,3,4,5,6,7,8];
+        else if ($user->hasRole('coordinator'))
+            $f_id = [$user->faculty->id];
+        else
+            $f_id = [];
+        $vacancies = Vacancy::whereIn('faculty_id', $f_id)->paginate(10);
         return view('vacancy.index')->with(['vacancies' => $vacancies]);
     }
     public function vacancy($id) {
@@ -20,7 +30,8 @@ class VacancyController extends Controller
     }
 
     public function add() {
-        return view('vacancy.add');
+        $faculties = Faculty::all();
+        return view('vacancy.add')->with(['faculties' => $faculties]);
     }
 
     public function edit($id) {
@@ -38,6 +49,9 @@ class VacancyController extends Controller
         $vacancy->description = $request->description;
         $vacancy->quota = $request->quota;
         $vacancy->company_id = $request->company_id;
+        $vacancy->faculty_id = $request->faculty_id;
+        if (Auth::user()->hasRole('teacher'))
+            $vacancy->type = 1;
         $vacancy->save();
 
         return redirect()->back()->with('success', 'Vacancy added successfully');
@@ -48,6 +62,7 @@ class VacancyController extends Controller
         $vacancy->title = $request->title;
         $vacancy->description = $request->description;
         $vacancy->quota = $request->quota;
+        $vacancy->faculty_id = $request->faculty_id;
         $vacancy->save();
 
         return redirect()->back()->with('success', 'Vacancy editted successfully');

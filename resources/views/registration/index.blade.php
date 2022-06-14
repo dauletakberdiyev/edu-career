@@ -29,8 +29,7 @@
                                 <span class="felx9 text-secondary">Unknown</span>
                             @endif
                         </h5>
-                    
-                    @if($registration != null)
+                @if($registration != null)
                     @if($registration->reason != null)
                     <div class="form-group group-profile">
                         <label class="mb-0">Reason</label>
@@ -69,7 +68,13 @@
             <div class="form-group group-profile">
               <label class="mb-0">Agreement</label>
               <span class="flex9 text-secondary">
-              <a href="{{ $registration->agreement }}" download >Click here to download agreement</a>
+            <form action="{{ route('registration.getagreement') }}" method="GET">
+                @csrf
+                <input type="text" name="id" value="{{ $registration->id }}" hidden>
+                <input type="text" name="filename" value="{{ $registration->agreement }}" hidden>
+                <button type="submit">Get</button>
+            </form>
+              
               </span>
             </div>
             @endif
@@ -86,7 +91,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        @if($registration != null && $registration->status != 1)
+                        @if($registration == null || $registration->status != 1)
                         <div class="fill-group">
                             <label>Agreement</label>
                             <input type="file" name="agreement" class="form-control-file" accept="pdf, doc, docx" required>
