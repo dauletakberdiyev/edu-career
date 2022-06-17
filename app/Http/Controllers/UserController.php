@@ -96,6 +96,14 @@ class UserController extends Controller
                 'address' => 'Kaskelen, Abylaikhan 1/1',
                 'user_id' => $user->id
             ]);
+
+            if ($request->hasFile('avatar')) {
+                $filename = $request->avatar->getClientOriginalName();
+                $extension = $request->avatar->getClientOriginalExtension();
+                $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
+                $company->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+                $company->save();
+            }
         }
 
         if ($request->hasFile('company_avatar')) {
