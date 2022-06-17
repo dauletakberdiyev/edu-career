@@ -30,12 +30,6 @@
                 </span>
             </div>
             <div class="form-group group-profile">
-              <label class="mb-0">Faculty</label>
-                <span class="flex9 text-secondary">
-                    {{ $company->user->faculty->name }}
-                </span>
-            </div>
-            <div class="form-group group-profile">
               <label class="mb-0">Description</label>
                 <span class="flex9 text-secondary">
                     {{ $company->description }}
