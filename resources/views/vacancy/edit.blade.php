@@ -27,19 +27,6 @@
                                 {{ $vacancy->description }}
                             </textarea>
                         </div>
-                        <div class="fill-group">
-                            <label>Type</label>
-                            <div class="d-flex">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" name="type" class="custom-control-input" {{ $vacancy->type == 0 ? "checked=''" : "lol" }} value="0" v-model="gender">
-                                    <label class="custom-control-label">Industrial</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" name="type" class="custom-control-input" {{ $vacancy->type == 1 ? "checked=''" : "lol" }} value="1" v-model="gender">
-                                    <label class="custom-control-label">Academic</label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-outline-primary ml-auto align-items-center" @click.prevent="submitStaff">Save</button>

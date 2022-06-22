@@ -27,7 +27,7 @@
                   @endif
                 @endrole
                 
-                <a class="flex btn btn-outline-primary" href="{{ route('vacancy.index') }}">Back</a>
+                <a class="flex btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
             </div>
         
             <div class="form-group group-profile">
@@ -40,7 +40,7 @@
             <div class="form-group group-profile">
               <label class="mb-0">Type</label>
                 <span class="flex9 text-secondary">
-                    @if($vacancy->type == 1)
+                    @if($vacancy->type == 0)
                       Industrial
                     @else
                       Academic
