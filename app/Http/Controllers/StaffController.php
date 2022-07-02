@@ -13,7 +13,7 @@ class StaffController extends Controller
     //
 
     public function index() {
-        $users = User::role('coordinator')->paginate(10);
+        $users = User::paginate(10);
         return view('staff.manage')->with(['users' => $users]);
     }
 
