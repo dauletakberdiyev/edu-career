@@ -33,6 +33,9 @@ Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function() {
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\StudentController::class, 'index'])->name('student');
+    Route::get('/dt/students', [App\Http\Controllers\StudentController::class, 'dt'])->name('dt_students');
+
+
     Route::get('/add', [App\Http\Controllers\StudentController::class, 'add'])->name('student.add');
     Route::get('/update/{id}', [App\Http\Controllers\StudentController::class, 'update'])->name('student.update');
     Route::post('/search', [App\Http\Controllers\StudentController::class, 'search'])->name('student.search');

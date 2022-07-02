@@ -27,7 +27,7 @@
                   <tr>
                     <th>Name Surname</th>
                     <th>Email</th>
-                    <th>Gender</th>
+                    <th>Role</th>
                     <th>Faculty</th>
                     <th>Image</th>
                     <th>Action</th>
@@ -38,7 +38,7 @@
                       <tr>
                         <td>{{ $user->firstname }} {{ $user->lastname }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->gender }}</td>
+                        <td>{{ $user->getRoleNames() }}</td>
                         <td>{{ $user->faculty->name }}</td>
                         <td>
                             <img src="{{ $user->avatar }}" alt="default__img" class="table__img">
