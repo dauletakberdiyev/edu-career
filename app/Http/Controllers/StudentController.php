@@ -70,7 +70,6 @@ class StudentController extends Controller
                 route('student.update', ['id' => $user->id]),
 
             ]);
-            error_log($user->avatar);
         }
         return Datatables::of($data)->make();
     }
