@@ -16,7 +16,7 @@ class StaffController extends Controller
 
     public function index() {
         $users = User::paginate(10);
-        return view('staff.manage')->with(['users' => $users]);
+        return view('staff.manage');//->with(['users' => $users]);
     }
 
     public function add() {
@@ -43,15 +43,20 @@ class StaffController extends Controller
         $users = User::get();
         $data = [];
         foreach ($users as $user) {
+            if ($user->faculty_id == null) {
+                $fn = '-';
+            } else {
+                $fn = $user->faculty->name;
+            }
+
             array_push($data, [
                 $user->firstname . ' ' . $user->lastname,
                 $user->email,
                 $user->getRoleNames(),
-                $user->faculty->name,
+                $fn,
                 $user->avatar,
                 route('staff.update', ['id' => $user->id]),
                 route('student.profile', ['id' => $user->id]),  
-
             ]);
         }
         return Datatables::of($data)->make();

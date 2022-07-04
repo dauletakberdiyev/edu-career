@@ -9,7 +9,6 @@
           
               <a class="btn btn-outline-primary" href="{{ route('staff.add') }}">Add Staff</a>
             </div>
-          
             <div class="table-outer">
                 <table id="order-table"  class="table main-table table-striped">
                   <thead>
@@ -25,17 +24,6 @@
                   </thead>
                   <tbody class="text-dark">
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>Name Surname</th>
-                      <th>Email</th>
-                      <th>Role</th>
-                      <th>Faculty</th>
-                      <th>Image</th>
-                      <th>Edit</th>
-                      <th>Profile</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
           </div>
@@ -80,25 +68,6 @@
                 },
             ],
         });
-
-        $("#order-table tfoot th").each( function ( i ) {
-		      if ($(this).text() !== '') {
-			      var select = $('<select><option value=""></option></select>')
-	            .appendTo( $(this).empty() )
-	            .on( 'change', function () {
-	                var val = $(this).val();
-					
-	                table.column( i )
-	                    .search( val ? '^'+$(this).val()+'$' : val, true, false )
-	                    .draw();
-	            } );
-              alert($(this).text());
-              table.column( i ).data().unique().sort().each( function ( d, j ) {  
-                select.append( '<option value="'+d+'">'+d+'</option>' );
-                alert(d);
-                  } );	    
-	        }
-    } );
         
         $('#order-table tbody').on('click', 'tr', function() {
             //var data = table.row(this).data();
