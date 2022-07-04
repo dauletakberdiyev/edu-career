@@ -40,14 +40,18 @@
                 {{ $user->faculty->name }}
                   </span>
             </div>
-            @if($user->cv != null)
+           
             <div class="form-group group-profile">
               <label class="mb-0">CV</label>
+              @if($user->cv != null)
               <span class="flex9 text-secondary">
               <a href="{{ $user->cv }}" download >Click here to download cv</a>
               </span>
+              @else
+              <span class="flex9 text-warning"> No CV </span>
+              @endif
             </div>
-            @endif
+           
           </div>
         </div>
       </main>

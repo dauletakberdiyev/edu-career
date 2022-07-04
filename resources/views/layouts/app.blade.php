@@ -11,12 +11,9 @@
 		<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.bootstrap4.min.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.datatables.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('cdn/dataTables.bootstrap4.min.css') }}">
 		
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

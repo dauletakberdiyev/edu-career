@@ -6,7 +6,23 @@
         <div class="container-fluid">
           <div class="main__inner">
             <h3 class="main__title">General information</h3>
-          
+            <div class="row information__blocks">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-12 px-4 information__block">
+                <div class="information__top">
+                  <span class="information__title text-warning">IMPORTANT</span>
+                </div>
+                <p class="information__subtitle">
+                  <span class="text-info">
+                  @role('student|admin|cordinator')
+                  Do not forget to upload your cv (resume), in edit profile page, before applying on vacancy. Otherwise companies can not see your cv.
+                  @endrole
+                  @role('company|admin|cordinator')
+                  Wait until your company is approved by admin. You can check the status in your profile.
+                  @endrole
+                  </span>
+                </p>
+              </div>
+            </div>
             <div class="row information__blocks">
           
               <div class="col-lg-4 col-md-12 col-sm-12 col-12 px-4 information__block">

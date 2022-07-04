@@ -26,6 +26,9 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function() {
 
 Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff');
+    Route::get('/dt/staff', [App\Http\Controllers\StaffController::class, 'dt'])->name('dt_staff');
+
+
     Route::get('/add', [App\Http\Controllers\StaffController::class, 'add'])->name('staff.add');
     Route::get('/update/{id}', [App\Http\Controllers\StaffController::class, 'update'])->name('staff.update');
     Route::post('/search', [App\Http\Controllers\StaffController::class, 'search'])->name('staff.search');

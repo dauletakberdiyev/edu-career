@@ -12,7 +12,7 @@
           
           
             <div class="table-outer">
-              <table id="order-table" class="table table-striped table-bordered nowrap datatable"  style="width:100%">
+              <table id="order-table" class="table main-table table-striped">
                 <thead>
                     <tr>
                         <th>name</th>
@@ -20,10 +20,11 @@
                         <th>gender</th>
                         <th>facuty</th>
                         <th>avatar</th>
-                        <th>update</th>
+                        <th>edit</th>
+                        <th>profile</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-dark">
                 </tbody>
               </table>
             </div>
@@ -39,19 +40,16 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route('dt_students') }}',
-            dom: 'Bfrtip',
-            buttons: [
-              'csv', 'excel'
-            ], 
+            
             columnDefs: [
               {  
                 "targets": "_all",
               },
             ],
             "columns": [
-                { "width": "5%" },
                 { "width": "35%" },
                 { "width": "30%" },
+                { "width": "10%" },
                 { "width": "30%" },
                 { "width": "30%",
                   "render": function ( url, type, full) {
@@ -64,14 +62,20 @@
                     return '<a href="'+full[5]+'" class="table-tool">edit</a>';
                   },
                 },
+                { 
+                  "width": "30%",
+                  "render": function ( url, type, full) {
+                    return '<a href="'+full[6]+'" class="table-tool">profile</a>';
+                  },
+                },
             ],
         });
         
         $('#order-table tbody').on('click', 'tr', function() {
-            var data = table.row(this).data();
-            var url = '';
-            url = url.replace(':id', data[0]);
-            window.open(url, '_blank');
+            //var data = table.row(this).data();
+            //var url = '';
+            //url = url.replace(':id', data[0]);
+            //window.open(url, '_blank');
         });
     });
 
