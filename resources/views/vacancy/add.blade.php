@@ -33,7 +33,7 @@
 
                         <div class="fill-group">
                             <label>Faculty</label>
-                            <select name="faculty_id" id="faculty">
+                            <select name="faculty_id" id="faculty" required>
                                 @foreach($faculties as $faculty)
                                     <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
                                 @endforeach

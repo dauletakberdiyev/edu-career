@@ -80,7 +80,7 @@
                   <li>
                     <a class="btn btn-outline-primary" href="{{ $users->previousPageUrl() }}"> < </a>
                   </li>
-                  @for ($i = 1; $i <= $users->lastPage(); $i++)
+                  @for ($i = 1; $i <= $users->lastPage() + 5; $i++)
                   <li>
                     <a class="btn btn-outline-primary {{ ($users->currentPage() == $i) ? ' active' : '' }}" href="{{ $users->url($i) }}"> {{ $i }}</a>
                   </li>

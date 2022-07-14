@@ -51,7 +51,7 @@
                 { 
                   "width": "30%",
                   "render": function ( url, type, full) {
-                    return '<img src="'+full[4]+'" alt="default__img" class="table__img">';
+                    return '<a href="'+full[4]+'" target="_blank">see avatar</a>';
                   },
                  },
                 { 

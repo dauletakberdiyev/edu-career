@@ -63,6 +63,8 @@ Route::group(['prefix' => 'vacancy', 'middleware' => ['auth']], function() {
     Route::get('/company/{id}', [App\Http\Controllers\VacancyController::class, 'vacancy'])->name('vacancy');
     Route::get('/detail/{id}', [App\Http\Controllers\VacancyController::class, 'detail'])->name('vacancy.detail');
     Route::get('/edit/{id}', [App\Http\Controllers\VacancyController::class, 'edit'])->name('vacancy.edit');
+    Route::get('/delete/{id}', [App\Http\Controllers\VacancyController::class, 'delete'])->name('vacancy.delete');
+
 
     Route::get('/add', [App\Http\Controllers\VacancyController::class, 'add'])->name('vacancy.add');
     Route::post('/addorm', [App\Http\Controllers\VacancyController::class, 'add_form'])->name('vacancy.add.form');

@@ -14,7 +14,7 @@ class CompanyController extends Controller
 {
     public function index() {
         $users = User::role('company')->paginate(10);
-        $companies = Company::paginate(10);
+        $companies = Company::orderBy('in_whitelist', 'asc')->paginate(15);
         return view('company.manage')->with(['users' => $users, 'companies' => $companies]);
     }
 

@@ -20,7 +20,7 @@ class VacancyController extends Controller
             $f_id = [$user->faculty->id];
         else
             $f_id = [];
-        $vacancies = Vacancy::whereIn('faculty_id', $f_id)->paginate(10);
+        $vacancies = Vacancy::whereIn('faculty_id', $f_id)->orderBy('created_at', 'desc')->paginate(15);
         return view('vacancy.index')->with(['vacancies' => $vacancies]);
     }
     public function vacancy($id) {
@@ -36,7 +36,8 @@ class VacancyController extends Controller
 
     public function edit($id) {
         $vacancy = Vacancy::find($id);
-        return view('vacancy.edit')->with(['vacancy' => $vacancy]);
+        $faculties = Faculty::all();
+        return view('vacancy.edit')->with(['vacancy' => $vacancy, 'faculties' => $faculties]);
     }
 
     public function add_form(Request $request) {
@@ -68,8 +69,8 @@ class VacancyController extends Controller
         return redirect()->back()->with('success', 'Vacancy editted successfully');
     }
 
-    public function delete(Request $request) {
-        $res = Vacancy::find($request->id)->delete();
+    public function delete(Vacancy $vacancy) {
+        $vacancy->delete();
         return redirect()->back()->with('success', 'Vacancy delleted successfully');
     }
 

@@ -19,7 +19,7 @@
                         <th>email</th>
                         <th>gender</th>
                         <th>facuty</th>
-                        <th>avatar</th>
+                        <th>cv</th>
                         <th>edit</th>
                         <th>profile</th>
                     </tr>
@@ -53,7 +53,9 @@
                 { "width": "30%" },
                 { "width": "30%",
                   "render": function ( url, type, full) {
-                    return '<img src="'+full[4]+'" alt="default__img" class="table__img">';
+                    if(full[4] == null)
+                      return '<span class="flex9 text-warning"> No CV </span>';
+                    return '<a href="'+full[4]+'" download>Download</a>';
                   },
                  },
                 { 

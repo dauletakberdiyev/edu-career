@@ -7,7 +7,7 @@
                     <div class="page__top">
                         <h3 class="page__title">Edit vacancy</h3>
 
-                        <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
+                       
                     </div>
 
                     <form action="{{ route('vacancy.edit.form') }}" method="POST" enctype="multipart/form-data">
@@ -26,6 +26,16 @@
                             <textarea type="text" class="form-control" placeholder="Enter description" name="description">
                                 {{ $vacancy->description }}
                             </textarea>
+                        </div>
+
+                        <div class="fill-group">
+                            <label>Faculty</label>
+                            <select name="faculty_id" id="faculty">
+                                <option value="{{ $vacancy->faculty->id }}">{{ $vacancy->faculty->name }}</option>
+                                @foreach($faculties as $faculty)
+                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="d-flex justify-content-end">

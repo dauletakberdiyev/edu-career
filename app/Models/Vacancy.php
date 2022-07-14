@@ -19,4 +19,8 @@ class Vacancy extends Model
     public function applicants() {
         return $this->belongsToMany(User::class, 'user_vacancy', 'vacancy_id', 'user_id')->withPivot('status');
     }
+
+    public function faculty() {
+        return $this->belongsTo(Faculty::class);
+    }
 }

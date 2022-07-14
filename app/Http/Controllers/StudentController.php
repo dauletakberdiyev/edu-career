@@ -66,7 +66,7 @@ class StudentController extends Controller
                 $user->email,
                 $user->gender,
                 $user->faculty->name,
-                $user->avatar,
+                $user->cv,
                 route('student.update', ['id' => $user->id]),
                 route('student.profile', ['id' => $user->id]),  
 
