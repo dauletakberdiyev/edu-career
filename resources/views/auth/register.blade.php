@@ -69,15 +69,17 @@
                 </select>
                 </div>
             </div>
-  
-            <!-- <input type="file" class="form-control-file" name="picture"> -->
-            <input class="form-control-file" name="avatar" id="actual-btn" type="file" hidden="" required>
-            <div class="choose_btn registration_choose_btn">
-              <!-- our custom upload button -->
-              <label for="actual-btn">Choose Picture</label>
-              <!-- name of file chosen -->
-              <span id="file-chosen">No Picture chosen</span>
+
+            <div class="form_column registration_column">
+              <div class="form-group inline registration_group" style="margin-right: 5px;">
+                <span class="text-info">Required / Обязательно загрузить фото</span>
+                <input class="" name="avatar" id="" type="file" required>
+              </div>
             </div>
+
+            <!-- <input type="file" class="form-control-file" name="picture"> -->
+           
+           
 
             <div id="company_profile" onload="hideCompanyProfile()">
                 <h3 style="color: white">Company profile</h3>
@@ -95,13 +97,11 @@
                         </textarea>
                     </div>
         
-                    <!-- <input type="file" class="form-control-file" name="picture"> -->
-                    <input class="form-control-file" name="company_avatar" id="company_avatar" type="file" hidden="">
-                    <div class="choose_btn registration_choose_btn">
-                        <!-- our custom upload button -->
-                        <label for="company_avatar">Choose company logo</label>
-                        <!-- name of file chosen -->
-                        <span id="file-chosen_co">No Picture chosen</span>
+                    <div class="form_column registration_column">
+                      <div class="form-group inline registration_group" style="margin-right: 5px;">
+                        <span class="text-info">Required / Обязательно загрузить фото</span>
+                        <input name="company_avatar" id="company_avatar" type="file">
+                      </div>
                     </div>
                 </div>
             </div>
