@@ -9,6 +9,12 @@
 
                         <a class="btn btn-outline-primary" href="{{ url()->previous() }}">Back</a>
                     </div>
+                    @if(session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Vacancy created successfully!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
 
                     @php 
                         $company = Auth::user()->company;
