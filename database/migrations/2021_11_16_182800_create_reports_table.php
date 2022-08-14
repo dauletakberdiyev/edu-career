@@ -24,6 +24,8 @@ class CreateReportsTable extends Migration
         Schema::create('reports_users', function (Blueprint $table) {
             $table->integer('report_id');
             $table->integer('user_id');
+            $table->integer('mark')->default(0);
+            $table->string('submission_link')->nullable();
             $table->timestamps();
         });
 

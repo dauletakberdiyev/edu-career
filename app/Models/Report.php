@@ -9,11 +9,13 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'text', 'link'];
+    protected $fillable = ['detail', 'due_date', 'name'];
     protected $table = 'reports';
 
-    public function user() {
-        return $this->belongsTo(User::class);
+   
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'reports_users')->withPivot('mark', 'submission_link')->withTimestamps(); ;
     }
 
 }

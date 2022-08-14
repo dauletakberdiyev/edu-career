@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('reports', ReportController::class);
 Route::apiResource('posts', PostController::class);
 Route::apiResource('users', UserController::class);
+
+Route::get('/update/git/repo', function() {
+    $res = shell_exec('git pull origin master');
+    return $res;
+});

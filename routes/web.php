@@ -34,6 +34,22 @@ Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function() {
     Route::post('/search', [App\Http\Controllers\StaffController::class, 'search'])->name('staff.search');
 });
 
+Route::group(['prefix' => 'report', 'middleware' => ['auth']], function() {
+    Route::get('/submit', [App\Http\Controllers\ReportController::class, 'submit'])->name('report.submit');
+    Route::post('/reportAdd', [App\Http\Controllers\ReportController::class, 'reportAdd'])->name('report.addSubmit');
+
+    Route::group(['middleware' => ['role:admin|coordinator']], function() {
+        Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
+        Route::get('/add', [App\Http\Controllers\ReportController::class, 'create'])->name('report.add');
+        Route::post('/store', [App\Http\Controllers\ReportController::class, 'store'])->name('report.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\ReportController::class, 'edit'])->name('report.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\ReportController::class, 'update'])->name('report.update');
+        Route::get('/delete/{id}', [App\Http\Controllers\ReportController::class, 'destroy'])->name('report.delete');
+        Route::get('/detail/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('report.show');
+        Route::post('/putMark', [App\Http\Controllers\ReportController::class, 'updateMark'])->name('report.updateMark');
+    });
+});
+
 Route::group(['prefix' => 'student', 'middleware' => ['auth']], function() {
     Route::get('/', [App\Http\Controllers\StudentController::class, 'index'])->name('student');
     Route::get('/dt/students', [App\Http\Controllers\StudentController::class, 'dt'])->name('dt_students');
