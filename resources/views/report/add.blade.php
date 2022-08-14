@@ -26,8 +26,8 @@
                             <input type="text" class="form-control" placeholder="Enter details" name="detail" v-model="password">
                         </div>
                         <div class="fill-group">
-                            <label>Due date</label>
-                            <input type="date" class="form-control" placeholder="Enter due date" name="due_date">
+                            <label>Deadline</label>
+                            <input type="date" class="form-control" placeholder="Enter Deadline" name="due_date">
                         </div>
 
                         <div class="d-flex justify-content-end">

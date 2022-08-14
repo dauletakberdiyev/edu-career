@@ -18,7 +18,7 @@
             </div>
         
             <div class="form-group group-profile">
-              <label class="mb-0">Due date</label>
+              <label class="mb-0">Deadline</label>
               <span class="flex9 text-secondary">
                   {{ $report->due_date }}
                 </span>

@@ -15,7 +15,7 @@
                     <tr>
                       <th>Name</th>
                       <th>Detail</th>
-                      <th>Due date</th>
+                      <th>Deadline</th>
                     </tr>
                   </thead>
                   <tbody class="text-dark">
