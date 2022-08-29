@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Grade;
 use App\Models\Report;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -15,6 +17,7 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::all();
+
         return view('report.manage', compact('reports'));
     }
 
@@ -31,7 +34,6 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,48 +49,51 @@ class ReportController extends Controller
             'name' => $request->get('name'),
         ]);
         $report->save();
+
         return redirect()->back()->with('success', 'Report saved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $report = Report::find($id);
+
         return view('report.show', compact('report'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -99,25 +104,35 @@ class ReportController extends Controller
         return redirect()->back()->with('success', 'Report deleted!');
     }
 
-    public function updateMark(Request $request) 
+    public function updateMark(Request $request)
     {
         $report = Report::find($request->get('report_id'));
         $report->users()->syncWithoutDetaching([$request->get('id') => ['mark' => $request->get('mark')]]);
+
+        $user = User::find($request->get('id'));
+        $reportGrade = $user->reportsGrade();
+
+        $grade = Grade::firstOrNew(['user_id' => $request->get('id')]);
+        $grade->report = $reportGrade;
+        $grade->save();
+
         return response()->json(['success' => 'Mark updated!']);
     }
 
-    public function submit() 
+    public function submit()
     {
         $report = Report::where('due_date', '>=', date('Y-m-d'))->first();
+
         return view('report.submit', compact('report'));
     }
 
-    public function reportAdd(Request $request) 
+    public function reportAdd(Request $request)
     {
         $report = Report::find($request->get('report_id'));
-        
+
         $report->users()->attach($request->get('user_id'), ['submission_link' => $request->get('submission_link')]);
         $report->save();
+
         return response()->json(['success' => 'Report submitted!']);
     }
 }

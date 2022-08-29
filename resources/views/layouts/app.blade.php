@@ -147,6 +147,17 @@
 								Submit report
 							</a>
 						</li>
+						<li class="sidebar__item">
+							<a href="{{ route('grade.index') }}" class="sidebar__link">
+									<span class="link__svg">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<polyline points="9 11 12 14 22 4"></polyline>
+											<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+										</svg>
+									</span>
+								Grades
+							</a>
+						</li>
 						@endrole
 						@role('admin')
 						<li class="sidebar__item">
@@ -260,6 +271,8 @@
 							</a>
 						</li>
 						@endrole
+
+						<!--
 						@role('admin|student')
 						<li class="sidebar__item">
 							<a class="sidebar__link" href="{{ route('registration') }}">
@@ -274,7 +287,6 @@
 							</a>
 						</li>
 						@endrole
-						<!--
 							<li class="sidebar__item">
 								<a class="sidebar__link" href="/templates/general_pages/manage_report.html">
 									<span class="link__svg">

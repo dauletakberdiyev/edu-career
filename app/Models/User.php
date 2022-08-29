@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +10,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasRoles;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,27 +51,50 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function reports() {
-        return $this->belongsToMany(Report::class, 'reports_users')->withTimestamps(); ;
+    public function reports()
+    {
+        return $this->belongsToMany(Report::class, 'reports_users')->withPivot('mark', 'submission_link')->withTimestamps();
     }
 
-    public function vacancies() {
+    public function vacancies()
+    {
         return $this->hasMany(Vacancy::class);
     }
 
-    public function applies() {
+    public function applies()
+    {
         return $this->belongsToMany(Vacancy::class);
     }
 
-    public function faculty() {
+    public function faculty()
+    {
         return $this->belongsTo(Faculty::class);
     }
 
-    public function company() {
+    public function company()
+    {
         return $this->hasOne(Company::class);
     }
 
-    public function registration() {
+    public function registration()
+    {
         return $this->hasOne(Registration::class);
+    }
+
+    public function grade()
+    {
+        return $this->hasOne(Grade::class);
+    }
+
+    public function reportsGrade()
+    {
+        $reports = $this->reports()->get();
+        $grade = 0;
+
+        foreach ($reports as $report) {
+            $grade += $report->pivot->mark;
+        }
+
+        return $grade * 0.01;
     }
 }
