@@ -79,7 +79,7 @@
                                 {{ $user->email }}
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="submission_link" placeholder="Paste the link to your report here" required>
+                                <input type="text" class="form-control" name="submission_link" placeholder="Paste the link to your report here" id='submission_link'>
                             </td>
                             <td>
                                 {{ date('Y-m-d') }}
@@ -106,20 +106,24 @@
 
 function submitReport(user_id, report_id) {
     var submission_link = $('input[name="submission_link"]').val();
-    $.ajax({
-        type: 'POST',
-        url: "{{ route('report.addSubmit') }}",
-        data: {
-            user_id: user_id,
-            report_id: report_id,
-            submission_link: submission_link,
-            _token: $('meta[name="_token"]').attr('content')
-        },
-        success: function(data) {
-            console.log(data);
-            window.location.reload();
-        }
-    });
+    if (submission_link != '') {
+      $.ajax({
+          type: 'POST',
+          url: "{{ route('report.addSubmit') }}",
+          data: {
+              user_id: user_id,
+              report_id: report_id,
+              submission_link: submission_link,
+              _token: $('meta[name="_token"]').attr('content')
+          },
+          success: function(data) {
+              console.log(data);
+              window.location.reload();
+          }
+      });
+    } else {
+      alert('Please, enter link for your submission');
+    }
 }
 
 function updateMark(id, report_id) {
