@@ -107,20 +107,23 @@
 function submitReport(user_id, report_id) {
     var submission_link = $('input[name="submission_link"]').val();
     if (submission_link != '') {
-      $.ajax({
-          type: 'POST',
-          url: "{{ route('report.addSubmit') }}",
-          data: {
-              user_id: user_id,
-              report_id: report_id,
-              submission_link: submission_link,
-              _token: $('meta[name="_token"]').attr('content')
-          },
-          success: function(data) {
-              console.log(data);
-              window.location.reload();
-          }
-      });
+      if (window.confirm('Are you sure to submit this link: ' + submission_link))
+      {
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('report.addSubmit') }}",
+            data: {
+                user_id: user_id,
+                report_id: report_id,
+                submission_link: submission_link,
+                _token: $('meta[name="_token"]').attr('content')
+            },
+            success: function(data) {
+                console.log(data);
+                window.location.reload();
+            }
+        });
+      }
     } else {
       alert('Please, enter link for your submission');
     }
