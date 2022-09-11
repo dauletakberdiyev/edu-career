@@ -41,7 +41,12 @@
                             {{ $company->name }}
                           </a>
                         </td>
-                        <td>{{ $company->user->email }}</td>
+                        
+                        <td>
+                          @if($company->user != null)
+                          {{ $company->user->email }}
+                          @endif
+                        </td>
                         <td>{{ $company->address }}</td>
                         <td></td>
                         <td>
