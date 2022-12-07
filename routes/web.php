@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,15 +26,26 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
     Route::get('/edit', [App\Http\Controllers\UserController::class, 'profile_edit'])->name('profile.edit');
 });
 
-Route::group(['prefix' => 'grades', 'middleware' => ['auth']], function () {
-    Route::get('/', [App\Http\Controllers\GradeController::class, 'index'])->name('grade.index');
-
-    Route::group(['middleware' => ['role:admin|coordinator']], function () {
-        Route::get('/{id}', [App\Http\Controllers\GradeController::class, 'show'])->name('grade.show');
-    });
+Route::group(['prefix' => 'assign', 'middleware' => ['role:admin|coordinator', 'auth'], 'controller' => RegistrationController::class], function () {
+    Route::get('/', 'assignIndex')->name('assign.index');
+    Route::post('/student', 'assignStudent')->name('assign.student');
 });
 
-Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'feedback', 'middleware' => ['auth'], 'controller' => RegistrationController::class], function () {
+    Route::post('/store', 'storeFeedback')->name('feedback.store');
+});
+
+Route::group(['prefix' => 'grades', 'middleware' => ['auth'], 'controller' => GradeController::class], function () {
+    Route::get('/', 'index')->name('grade.index');
+    Route::get('/all', 'grades')->middleware('role:admin|coordinator|company')->name('grade.all');
+    Route::group(['middleware' => ['role:admin|coordinator']], function () {
+        Route::get('/{id}', 'show')->name('grade.show');
+        Route::post('/updateFinalMark', 'updateFinalMark')->name('grade.updateFinalMark');
+    });
+    Route::post('/updateSupervisorMark', 'updateSupervisorMark')->middleware('role:admin|coordinator|company')->name('grade.updateSupervisorMark');
+});
+
+Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'role:admin|coordinator']], function () {
     Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff');
     Route::get('/dt/staff', [App\Http\Controllers\StaffController::class, 'dt'])->name('dt_staff');
 
@@ -68,16 +81,19 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
 });
 
 Route::group(['prefix' => 'company', 'middleware' => ['auth']], function () {
-    Route::get('/', [App\Http\Controllers\CompanyController::class, 'index'])->name('company');
-    Route::get('/add', [App\Http\Controllers\CompanyController::class, 'add'])->name('company.add');
-    Route::get('/update/{id}', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');
-    Route::post('/updateform', [App\Http\Controllers\CompanyController::class, 'update_form'])->name('company.update.form');
-    Route::post('/search', [App\Http\Controllers\CompanyController::class, 'search'])->name('company.search');
-    Route::get('/{id}', [App\Http\Controllers\CompanyController::class, 'detail'])->name('company.detail');
+    Route::group(['middleware' => ['role:admin|coordinator']], function () {
+        Route::get('/', [App\Http\Controllers\CompanyController::class, 'index'])->name('company');
+        Route::get('/add', [App\Http\Controllers\CompanyController::class, 'add'])->name('company.add');
+        Route::get('/update/{id}', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');
+        Route::post('/updateform', [App\Http\Controllers\CompanyController::class, 'update_form'])->name('company.update.form');
+        Route::post('/search', [App\Http\Controllers\CompanyController::class, 'search'])->name('company.search');
 
-    Route::post('/addform', [App\Http\Controllers\CompanyController::class, 'add_form'])->name('company.add.form');
-    Route::post('/approve', [App\Http\Controllers\CompanyController::class, 'approve'])->name('company.approve');
-    Route::post('/reject', [App\Http\Controllers\CompanyController::class, 'reject'])->name('company.reject');
+        Route::post('/addform', [App\Http\Controllers\CompanyController::class, 'add_form'])->name('company.add.form');
+        Route::post('/approve', [App\Http\Controllers\CompanyController::class, 'approve'])->name('company.approve');
+        Route::post('/reject', [App\Http\Controllers\CompanyController::class, 'reject'])->name('company.reject');
+    });
+
+    Route::get('/{id}', [App\Http\Controllers\CompanyController::class, 'detail'])->name('company.detail');
 });
 
 Route::group(['prefix' => 'vacancy', 'middleware' => ['auth']], function () {
@@ -111,7 +127,7 @@ Route::group(['prefix' => 'registration', 'middleware' => ['auth']], function ()
     Route::get('agreement', [App\Http\Controllers\RegistrationController::class, 'download_agreement'])->name('registration.getagreement');
 });
 
-Route::group(['prefix' => 'term', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'term', 'middleware' => ['auth', 'role:admin|coordinator']], function () {
     Route::get('/edit', [App\Http\Controllers\TermController::class, 'edit'])->name('term.edit');
 
     Route::post('/update', [App\Http\Controllers\TermController::class, 'update'])->name('term.update');

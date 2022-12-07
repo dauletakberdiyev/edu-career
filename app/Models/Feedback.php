@@ -5,20 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Registration extends Model
+class Feedback extends Model
 {
     use HasFactory;
 
-    protected $table = 'registrations';
     protected $fillable = [
         'user_id',
-        'vacancy_id',
-        'agreement',
-        'reason',
-        'type',
-        'status',
-        'term_id',
         'company_id',
+        'rate',
+        'term_id',
+        'note',
     ];
 
     public function user()
@@ -26,8 +22,8 @@ class Registration extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function vacancy()
+    public function company()
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsTo(Company::class);
     }
 }

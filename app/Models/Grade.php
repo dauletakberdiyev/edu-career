@@ -13,4 +13,9 @@ class Grade extends Model
     protected $fillable = [
         'user_id', 'report', 'supervisor', 'final',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

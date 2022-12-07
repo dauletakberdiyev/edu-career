@@ -97,4 +97,9 @@ class User extends Authenticatable
 
         return $grade * 0.01;
     }
+
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class);
+    }
 }
