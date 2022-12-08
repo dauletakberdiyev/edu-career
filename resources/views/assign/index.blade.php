@@ -17,7 +17,7 @@
               <input type="hidden" name="id" value="{{ $user->id }}">
               <div class="custom-form-control">
                 <label>Student</label>
-                <select name="user_id" class="form-select selectpicker" aria-label="Default select example" id="select-student" data-live-search="true">
+                <select name="user_id" class="form-select selectpicker select2" aria-label="Default select example" id="select-student" data-live-search="true">
                     <option selected>Open this select menu</option>
                     @foreach($students as $student)
                         <option data-tokens="{{ $student->email }}" value="{{ $student->id }}">{{ $student->email }}</option>
@@ -26,7 +26,7 @@
               </div>
               <div class="custom-form-control">
                 <label>Company</label>
-                <select name="company_id" class="form-select selectpicker" aria-label="Default select example" data-live-search="true">
+                <select name="company_id" class="form-select selectpicker select2" aria-label="Default select example" data-live-search="true">
                     <option selected>Select company</option>
                     @foreach($companies as $company)
                         @if ($company->user != null)
@@ -73,9 +73,13 @@
 @endsection
 
 @section('scripts')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function() {
         var table = $('#table').DataTable({});
+        $('.select2').select2();
     });
 </script>
 @endsection

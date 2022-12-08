@@ -35,19 +35,20 @@
             </div>
           
             <div class="table-outer">
-                <table class="table main-table">
+                <table id="table" class="table main-table">
                   <thead>
                   <tr>
                     <th>Student</th>
                     <th>Email</th>
                     <th>Submission</th>
-                    <th> Submission date</th>
+                    <th>Submission date</th>
                     <th>Mark</th>
+                    <th>Set mark</th>
                   </tr>
                   </thead>
                   <tbody class="text-dark">
                     @php 
-                        $applicants = $report->users()->paginate(10);
+                        $applicants = $report->users()->get();
                     @endphp
                     @foreach($applicants as $applicant)
                       <tr>
@@ -66,6 +67,10 @@
                         </td>
                         <td>
                             {{ $applicant->pivot->created_at }}
+                        </td>
+                        <td>
+                          {{ $applicant->pivot->mark }}
+                        </td>
                         <td>
                             <input type="number" class="form-control" name="mark-{{ $applicant->id }}" value="{{ $applicant->pivot->mark }}" onchange="updateMark({{ $applicant->id }}, {{ $report->id }})">
                         </td>
@@ -74,27 +79,31 @@
                   </tbody>
                 </table>
               </div>
-              <div class="align-content-center justify-content-center d-flex">
-                <ul class="pagination">
-                  <li>
-                    <a class="btn btn-outline-primary" href="{{ $applicants->previousPageUrl() }}"> < </a>
-                  </li>
-                  @for ($i = 1; $i <= $applicants->lastPage(); $i++)
-                  <li>
-                    <a class="btn btn-outline-primary {{ ($applicants->currentPage() == $i) ? ' active' : '' }}" href="{{ $applicants->url($i) }}"> {{ $i }}</a>
-                  </li>
-                  @endfor
-                  <li>
-                    <a class="btn btn-outline-primary" href="{{ $applicants->nextPageUrl() }}"> > </a>
-                  </li>
-                </ul>
-              </div>
             </div>
         </div>
       </main>
 @endsection
 @section('scripts')
 <script> 
+$(document).ready(function() {
+    var table = $('#table').DataTable({
+      dom:  "lfBptrip",
+      paging: false,
+      buttons: [
+        'excel',
+        'pdf',
+        'print'
+      ],
+      "columns": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        { "width": "25%" },
+      ]
+    });
+});
 
 function updateMark(id, report_id) {
   var mark = $('input[name=mark-' + id + ']').val();
