@@ -30,4 +30,9 @@ class Registration extends Model
     {
         return $this->belongsTo(Vacancy::class);
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

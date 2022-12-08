@@ -88,8 +88,9 @@ class RegistrationController extends Controller
     {
         $students = User::role('student')->orderBy('email')->get();
         $companies = Company::orderBy('name')->get();
+        $registrations = Registration::all();
 
-        return view('assign.index', compact('students', 'companies'));
+        return view('assign.index', compact('students', 'companies', 'registrations'));
     }
 
     public function assignStudent(Request $request)

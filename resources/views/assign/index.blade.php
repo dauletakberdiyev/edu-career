@@ -9,7 +9,7 @@
           <div class="page__inner">
             
 
-            <form method="post" enctype="multipart/form-data" action="{{ route('assign.student') }}">
+            <form class="mb-5" method="post" enctype="multipart/form-data" action="{{ route('assign.student') }}">
               <div class="d-flex justify-content-between mb-4">
                   <h3 class="page__title">Assign student to company</h3>
               </div>
@@ -39,10 +39,43 @@
               </div>
               <button type="submit" class="btn btn-outline-primary">Save</button>
             </form>
+
+            <div class="table-outer">
+                <table id="table"  class="table main-table table-striped">
+                  <thead>
+                    <tr>
+                        <th>student</th>
+                        <th>company</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-dark">
+                    @foreach($registrations as $r)
+                        <tr>
+                            <th>
+                                {{ $r->user->email }}
+                            </th>
+                            <th>
+                                @if($r->company != null)
+                                  {{ $r->company->name }} 
+                                @else 
+                                  None
+                                @endif
+                            </th>
+                           
+                        </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+            </div>
           </div>
         </div>
       </main>
 @endsection
 
 @section('scripts')
+<script>
+    $(document).ready(function() {
+        var table = $('#table').DataTable({});
+    });
+</script>
 @endsection
