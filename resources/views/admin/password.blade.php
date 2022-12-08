@@ -13,11 +13,11 @@
               @csrf
               <div class="custom-form-control">
                 <label>Email</label>
-                <input name='email' />
+                <input name='email' required />
               </div>
               <div class="custom-form-control">
                 <label>Password</label>
-                <input name='password' />
+                <input name='password' required />
               </div>
               <button type="submit" class="btn btn-outline-primary">Set</button>
             </form>
