@@ -31,6 +31,11 @@ Route::group(['prefix' => 'assign', 'middleware' => ['role:admin|coordinator', '
     Route::post('/student', 'assignStudent')->name('assign.student');
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin|coordinator', 'auth'], 'controller' => RegistrationController::class], function () {
+    Route::get('/', 'password')->name('admin.index');
+    Route::post('/setPassword', 'setPassword')->name('admin.setPassword');
+});
+
 Route::group(['prefix' => 'feedback', 'middleware' => ['auth'], 'controller' => RegistrationController::class], function () {
     Route::post('/store', 'storeFeedback')->name('feedback.store');
 });

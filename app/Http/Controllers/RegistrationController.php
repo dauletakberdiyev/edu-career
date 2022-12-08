@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class RegistrationController extends Controller
@@ -112,6 +113,25 @@ class RegistrationController extends Controller
             'rate' => $request->get('rate'),
             'note' => $request->has('note') ? $request->get('note') : null,
         ]);
+
+        return redirect()->back();
+    }
+
+    public function password()
+    {
+        return view('admin.password');
+    }
+
+    public function setPassword(Request $request)
+    {
+        $user = User::where('email', $request->get('email'))->first();
+
+        if ($user == null) {
+            return redirect()->back();
+        }
+
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
 
         return redirect()->back();
     }
