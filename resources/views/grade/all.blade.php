@@ -12,6 +12,15 @@
               <h3 class="page__title">Grades</h3>
             </div>
             <div class="table-outer">
+                <span class="text-info">
+                    @role('admin|cordinator')
+                        Supervisor mark should be in range 0-60. Maximum point is 60. <br>
+                    @endrole
+                    @role('company')
+                        Supervisor mark should be in range 0-60. Maximum point is 60.
+                    @endrole
+                    
+                </span>
                 <table id="table"  class="table main-table table-striped">
                   <thead>
                     <tr>
