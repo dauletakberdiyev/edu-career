@@ -12,7 +12,7 @@ Portal for beta career program.
 This project requires PHP 7.*, Composer, Mysql installed on your computer
 
 ```sh
-git clone git@gitlab.com:abylayomar/sdu-beta-career-portal.git
+git clone https://github.com/dauletakberdiyev/edu-career.git
 cd sdu-beta-career-portal
 composer install
 ```
@@ -21,6 +21,7 @@ After you need to create .env file. And write all configurations there. You can 
 Apply all migration, seed database with initial information. And up local server
 
 ```sh
+php artisan key:generate
 php artisan migrate:fresh --seed
 php artisan serve
 ```
