@@ -16,12 +16,17 @@ class FacultySeeder extends Seeder
      */
     public function run()
     {
-        $names = ['Computer Science', 'Information Systems', 'Mathematics', 
-    'Mathematical and Computer Modelling',
-    'Law faculty',
-    'Халықаралық қатынастар',
-    'Халықаралық құқық',
-    'Қолданбалы құқық',
+        $names = [
+            'Two Foreign Languages', 
+            'Kazakh Language and Literature', 
+            'Applied Philology', 
+            'Chemistry and Biology',
+            'Physics and Informatics',
+            'Mathematics Pedagogical',
+            'History',
+            'Pre-School Education',
+            'Primary Education',
+            'Social Pedagogy'
     ];
 
         foreach ($names as $name) {

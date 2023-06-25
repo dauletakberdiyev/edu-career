@@ -28,10 +28,10 @@
               <div class="col-lg-4 col-md-12 col-sm-12 col-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/helmet.png" alt="helmet" class="information__img">
-                  <span class="information__title">Beta Career</span>
+                  <span class="information__title">EDU Career</span>
                 </div>
                 <p class="information__subtitle">
-                  Beta Career is a special course for fourth year students (or third year students coming after college) that covers all elective courses of the penultimate semester (the one before last) of a study program. Beta Career is optional and has its own requirements described in the next sections. The number of students that are admitted to Beta Career is limited.
+                  EDU Career is a special course for fourth year students (or third year students coming after college or NIS) that covers all elective courses of the penultimate semester (the one before last) of a study program. EDU Career is optional and has its own requirements described in the next sections. The number of students that are admitted to EDU Career is limited.
                 </p>
               </div>
           
@@ -41,12 +41,12 @@
                   <span class="information__title">Goals</span>
                 </div>
                 <p class="information__subtitle">
-                  The goals of Beta Career are the following:
+                  The goals of EDU Career are the following:
                 </p>
                 <ul class="information__list">
-                  <li>To master technical and soft skills</li>
-                  <li>To gain essential background knowledge</li>
-                  <li>To build a network of contacts</li>
+                  <li>Increase the professional training of future specialists</li>
+                  <li>Organize the training process of graduate students in accordance with the needs of employers</li>
+                  <li>Strengthen the relationship between education and practice</li>
                 </ul>
               </div>
           
@@ -56,25 +56,25 @@
                   <span class="information__title">Duration</span>
                 </div>
                 <p class="information__subtitle">
-                  The duration of Beta Career is 15 weeks. It starts in September 2021, and ends in December 2022.
+                  The duration of EDU Career is 15 weeks. It starts in September {{now()->year}}, and ends in December {{now()->year}}.
                 </p>
               </div>
           
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/pollution.png" alt="pollution" class="information__img">
-                  <span class="information__title">Types</span>
+                  <span class="information__title">Requirements</span>
                 </div>
                 <p class="information__subtitle">
-                  There are three types of Beta Career. Students can choose the one, which suits them, the most. They are the following:
+                  There are three departments of EDU Career. Each department has its own GPA requirements. They are the following:
                 </p>
                 <ul class="information__list">
-                  <li>Industrial Beta</li>
-                  <li>Academic Beta</li>
-                  <li>SDU Beta</li>
+                  <li>Language Department - equal or more than 3.5</li>
+                  <li>Natural Sciences Department - equal or more than 3.3</li>
+                  <li>Humanities Department - equal or more than 3.0</li>
                 </ul>
           
-                <p class="information__bottom">Subsequent sections of this document describe each type of Beta Career in more detail.</p>
+    
               </div>
           
               <div class="col-lg-4 col-md-12 px-4 information__block">
@@ -83,7 +83,7 @@
                   <span class="information__title">Grading Policy</span>
                 </div>
                 <p class="information__subtitle">
-                  There are three types of Beta Career. Students can choose the one, which suits them, the most. They are the following:
+                  There are three types of assessment at EDU Career. They are the following:
                 </p>
           
                 <div class="table-over">
@@ -97,23 +97,23 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Formative Assessment</td>
-                        <td>60</td>
-                        <td>Supervisor</td>
+                        <td>Formative Assessment of Internship</td>
+                        <td>40</td>
+                        <td>External Mentor</td>
                       </tr>
                     </tbody>
                     <tbody>
                       <tr>
-                        <td>Reports</td>
-                        <td>15</td>
-                        <td>Coordinator</td>
+                        <td>Weekly Reports</td>
+                        <td>30</td>
+                        <td>SDU Coordinator</td>
                       </tr>
                     </tbody>
                     <tbody>
                       <tr>
                         <td>Final Presentation</td>
-                        <td>25</td>
-                        <td>Coordinator</td>
+                        <td>30</td>
+                        <td>SDU Coordinator</td>
                       </tr>
                     </tbody>
                   </table>
@@ -125,12 +125,12 @@
                   <span class="information__title">Limitations</span>
                 </div>
                 <p class="information__subtitle">
-                  For 2021-2022 academic year, the limitations are the following
+                  For {{now()->year}}-{{now()->year + 1}} academic year, the limitations are the following
                 </p>
                 <ul class="information__list">
-                  <li>Total number of students for Beta Career - 270</li>
-                  <li>Total number of students for Industrial Beta - 200</li>
-                  <li>Total number of students for Academic and SDU Beta - 70</li>
+                  <li>Total number of students for Language Department - 25</li>
+                  <li>Total number of students for Natural Sciences Department - 45</li>
+                  <li>Total number of students for Humanities Department - 55</li>
                 </ul>
               </div>
             </div>
