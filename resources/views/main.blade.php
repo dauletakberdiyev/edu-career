@@ -70,7 +70,7 @@
                 </p>
                 <ul class="information__list">
                   <li>Language Department - equal or more than 3.5</li>
-                  <li>Natural Sciences Department - equal or more than 3.3</li>
+                  <li>Natural Sciences Department - equal or more than 3.5</li>
                   <li>Humanities Department - equal or more than 3.0</li>
                 </ul>
           

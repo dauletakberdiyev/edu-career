@@ -37,7 +37,7 @@
 								<span class="bar"></span>
 							</div>
 							<a href="#" class="header__logo">
-							<img src="{{ asset('/images/header/logo_beta.png') }}" alt="logo_beta">
+							<img src="{{ asset('/images/header/edu_logo.png') }}" alt="logo_beta">
 							</a>
 							<div class="menu__right">
 								<button class="menu__notification">
