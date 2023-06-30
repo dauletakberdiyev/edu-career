@@ -6,14 +6,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		@yield('meta')
-		<title>Betacareer</title>
+		<title>Educareer</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.datatables.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('cdn/dataTables.bootstrap4.min.css') }}">
-		
+
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 		@yield('styles')
 	</head>
 	<body>
-		@php 
+		@php
 		$user = Auth::user();
 		@endphp
 		<div id="app">
@@ -85,7 +85,7 @@
 									<div class="ava__btn">
 										<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
 										Logout
-										</a>    
+										</a>
 										<form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
 											{{ csrf_field() }}
 										</form>
@@ -219,7 +219,7 @@
 						<li class="sidebar__item">
 							<a href="{{ route('report') }}" class="sidebar__link">
 								<span class="link__svg">
-									
+
 								</span>
 								Manage reports
 							</a>
@@ -274,7 +274,7 @@
 						</li>
 						@endrole
 						@role('company|teacher')
-						@php 
+						@php
 						$company = Auth::user()->company;
 						@endphp
 						<li class="sidebar__item">

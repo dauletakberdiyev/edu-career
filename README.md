@@ -23,6 +23,7 @@ Apply all migration, seed database with initial information. And up local server
 ```sh
 php artisan key:generate
 php artisan migrate:fresh --seed
+php artisan storage:link
 php artisan serve
 ```
 

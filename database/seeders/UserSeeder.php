@@ -44,11 +44,10 @@ class UserSeeder extends Seeder
         $company->user->assignRole('company');
         */
         $admin = User::create([
-            'firstname' => 'Bauyrzhan',
-            'lastname' => 'Berlikozha',
-            'email' => 'bauyrzhan.berlikozha@sdu.edu.kz',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'faculty_id' => 1,
+            'firstname' => 'Abbas',
+            'lastname' => 'Bodaubekov',
+            'email' => 'abbas.bodaubekov@sdu.edu.kz',
+            'password' => '$2y$10$xKBJb2O8PE33YOmUY76PU.OIxGiY9sJPk8qGfZkbm7dgl/ejf8e3O',
             'gender' => "Male",
         ]);
 
