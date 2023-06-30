@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="row information__blocks">
-          
+
               <div class="col-lg-4 col-md-12 col-sm-12 col-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/helmet.png" alt="helmet" class="information__img">
@@ -34,7 +34,7 @@
                   EDU Career is a special course for fourth year students (or third year students coming after college or NIS) that covers all elective courses of the penultimate semester (the one before last) of a study program. EDU Career is optional and has its own requirements described in the next sections. The number of students that are admitted to EDU Career is limited.
                 </p>
               </div>
-          
+
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/cogwheel.png" alt="cogwheel" class="information__img">
@@ -49,7 +49,7 @@
                   <li>Strengthen the relationship between education and practice</li>
                 </ul>
               </div>
-          
+
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/light-bulb.png" alt="light-bulb" class="information__img">
@@ -59,7 +59,7 @@
                   The duration of EDU Career is 15 weeks. It starts in September {{now()->year}}, and ends in December {{now()->year}}.
                 </p>
               </div>
-          
+
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/pollution.png" alt="pollution" class="information__img">
@@ -73,10 +73,10 @@
                   <li>Natural Sciences Department - equal or more than 3.5</li>
                   <li>Humanities Department - equal or more than 3.0</li>
                 </ul>
-          
-    
+
+
               </div>
-          
+
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/pumpjack.png" alt="pumpjack" class="information__img">
@@ -85,35 +85,41 @@
                 <p class="information__subtitle">
                   There are three types of assessment at EDU Career. They are the following:
                 </p>
-          
+
                 <div class="table-over">
                   <table class="table table-bordered main-table">
                     <thead>
                     <tr>
-                      <th>Type</th>
+                      <th>Assessment Type</th>
                       <th>Grade</th>
-                      <th>Grader</th>
+                      <th>Responsible person</th>
                     </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Formative Assessment of Internship</td>
                         <td>40</td>
-                        <td>External Mentor</td>
+                        <td>Mentor</td>
                       </tr>
-                    </tbody>
-                    <tbody>
                       <tr>
-                        <td>Weekly Reports</td>
-                        <td>30</td>
-                        <td>SDU Coordinator</td>
+                        <td>Internship plan</td>
+                        <td>10</td>
+                        <td>Edu Career Coordinator</td>
                       </tr>
-                    </tbody>
-                    <tbody>
+                      <tr>
+                        <td>Reports (video report, daily week on platform youtube or instagram)</td>
+                        <td>15</td>
+                        <td>Edu Career Coordinator</td>
+                      </tr>
+                      <tr>
+                        <td>Weekly work plan</td>
+                        <td>15</td>
+                        <td>Edu Career Coordinator</td>
+                      </tr>
                       <tr>
                         <td>Final Presentation</td>
-                        <td>30</td>
-                        <td>SDU Coordinator</td>
+                        <td>20</td>
+                        <td>Edu Career Coordinator</td>
                       </tr>
                     </tbody>
                   </table>

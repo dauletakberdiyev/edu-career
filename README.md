@@ -1,6 +1,6 @@
-# SDU Beta Career Portal
+# SDU Edu Career Portal
 
-Portal for beta career program. 
+Portal for edu career program. 
 
 ## Features
 
@@ -13,7 +13,7 @@ This project requires PHP 7.*, Composer, Mysql installed on your computer
 
 ```sh
 git clone https://github.com/dauletakberdiyev/edu-career.git
-cd sdu-beta-career-portal
+cd edu-career-portal
 composer install
 ```
 
