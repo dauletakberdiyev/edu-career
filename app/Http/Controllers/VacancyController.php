@@ -69,7 +69,8 @@ class VacancyController extends Controller
         return redirect()->back()->with('success', 'Vacancy editted successfully');
     }
 
-    public function delete(Vacancy $vacancy) {
+    public function delete($id) {
+        $vacancy = Vacancy::find($id);
         $vacancy->delete();
         return redirect()->back()->with('success', 'Vacancy delleted successfully');
     }
@@ -122,7 +123,7 @@ class VacancyController extends Controller
         }
         $vacancy->applicants()->updateExistingPivot($request->user_id, ['status' => 2]);
 
-        
+
         return response()->json(['message' => 'You have rejected successfully']);
     }
 
