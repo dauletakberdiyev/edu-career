@@ -90,30 +90,44 @@
                   <table class="table table-bordered main-table">
                     <thead>
                     <tr>
-                      <th>Type</th>
+                      <th>Assessment Type</th>
                       <th>Grade</th>
-                      <th>Grader</th>
+                      <th>Responsible person</th>
                     </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Formative Assessment of Internship</td>
                         <td>40</td>
-                        <td>External Mentor</td>
+                        <td>Mentor</td>
                       </tr>
                     </tbody>
                     <tbody>
                       <tr>
-                        <td>Weekly Reports</td>
-                        <td>30</td>
-                        <td>SDU Coordinator</td>
+                        <td>Internship plan</td>
+                        <td>10</td>
+                        <td>Edu Career Coordinator</td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td>Reports (video report, daily week on platform youtube or instagram)</td>
+                        <td>15</td>
+                        <td>Edu Career Coordinator</td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td>Weekly work plan</td>
+                        <td>15</td>
+                        <td>Edu Career Coordinator</td>
                       </tr>
                     </tbody>
                     <tbody>
                       <tr>
                         <td>Final Presentation</td>
-                        <td>30</td>
-                        <td>SDU Coordinator</td>
+                        <td>20</td>
+                        <td>Edu Career Coordinator</td>
                       </tr>
                     </tbody>
                   </table>
