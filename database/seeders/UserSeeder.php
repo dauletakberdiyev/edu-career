@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Abbas',
             'lastname' => 'Bodaubekov',
             'email' => 'abbas.bodaubekov@sdu.edu.kz',
-            'password' => $2y$10$xKBJb2O8PE33YOmUY76PU.OIxGiY9sJPk8qGfZkbm7dgl/ejf8e3O',
+            'password' => '$2y$10$xKBJb2O8PE33YOmUY76PU.OIxGiY9sJPk8qGfZkbm7dgl/ejf8e3O',
             'gender' => "Male",
         ]);
 
