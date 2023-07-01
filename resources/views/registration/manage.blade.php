@@ -23,16 +23,6 @@
                             </div>
 
                             <div class="form-group flex-column align-items-start ml-3">
-                                <label class="form-label">Beta type:</label>
-                                <select id="inputState" class="form-select">
-                                    <option selected>-------</option>
-                                    <option>SDU Beta</option>
-                                    <option>Academic Beta</option>
-                                    <option>Industrial Beta</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group flex-column align-items-start ml-3">
                                 <label class="form-label">Registration status</label>
                                 <select id="inputState" class="form-select">
                                     <option selected>-------</option>
@@ -134,7 +124,7 @@
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script> 
+  <script>
     $(".changeStatus").on('click', function(event){
       var reg_id = $(this).attr('reg_id');
       var status = $(this).attr('status');
