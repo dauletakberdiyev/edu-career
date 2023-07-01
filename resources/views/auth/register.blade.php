@@ -27,7 +27,7 @@
                 <option value="" disabled="" selected="">Select your position</option>
                 <option value="student">Student</option>
                 <option value="company">Company</option>
-                <option value="teacher">Teacher</option>
+                <!-- <option value="teacher">Teacher</option> -->
               </select>
             </div>
             @php 

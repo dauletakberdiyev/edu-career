@@ -14,10 +14,10 @@
             <div class="table-outer">
                 <span class="text-info">
                     @role('admin|cordinator')
-                        Supervisor mark should be in range 0-60. Maximum point is 60. <br>
+                        Supervisor mark should be in range 0-40. Maximum point is 40. <br>
                     @endrole
                     @role('company')
-                        Supervisor mark should be in range 0-60. Maximum point is 60.
+                        Supervisor mark should be in range 0-40. Maximum point is 40.
                     @endrole
                     
                 </span>
