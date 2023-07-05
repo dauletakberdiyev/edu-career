@@ -84,6 +84,17 @@
                     {{ $company->description }}
                 </span>
             </div>
+
+            @role('admin|company')
+            @if($company->cv != null)
+            <div class="form-group group-profile">
+              <label class="mb-0">CV</label>
+              <span class="flex9 text-secondary">
+              <a href="{{ $company->cv }}" download >Click here to download cv</a>
+              </span>
+            </div>
+            @endif
+            @endrole
             @endif
           </div>
         </div>

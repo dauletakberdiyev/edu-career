@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@php 
+@php
     $user = $company->user();
 @endphp
 <main class="main">
@@ -11,18 +11,18 @@
                 <a href="{{ route('vacancy', ['id' => $company->id]) }}" class="btn btn-outline-primary">Vacancies</a>
             </div>
             <div class="main__title mb-3">{{ $company->name }}</div>
-        
+
             <div class="d-flex align-items-center mb-4">
               <img src="{{ $company->avatar }}" width="80" height="80" class="profile-img">
             </div>
-        
+
             <div class="form-group group-profile">
               <label class="mb-0">Email</label>
               <span class="flex9 text-secondary">
                   {{ $company->user->email }}
                 </span>
             </div>
-        
+
             <div class="form-group group-profile">
               <label class="mb-0">Address</label>
                 <span class="flex9 text-secondary">
@@ -35,7 +35,21 @@
                     {{ $company->description }}
                 </span>
             </div>
-        
+            @role('company|admin')
+                @if (isset($company->cv))
+                    <div class="form-group group-profile">
+                        <label class="mb-0">CV</label>
+                        <a href="{{ $company->cv }}" download >Click here to download cv</a>
+                    </div>
+                @else
+                <div class="form-group group-profile">
+                    <label class="mb-0">CV</label>
+                    <span class="flex9 text-secondary">
+                        No CV
+                    </span>
+                </div>
+                @endif
+            @endrole
           </div>
         </div>
       </main>

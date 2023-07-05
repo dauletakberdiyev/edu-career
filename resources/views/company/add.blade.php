@@ -40,6 +40,11 @@
                             <input type="file" name="avatar" class="form-control-file" accept="image/jpeg,image/png,image/gif">
                         </div>
 
+                        <div class="fill-group">
+                            <label>CV</label>
+                            <input type="file" name="cv" class="form-control-file">
+                        </div>
+
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-outline-primary ml-auto align-items-center" @click.prevent="submitStaff">Save</button>
                         </div>

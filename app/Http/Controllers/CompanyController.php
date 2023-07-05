@@ -52,6 +52,14 @@ class CompanyController extends Controller
             $company->save();
         }
 
+        if ($request->hasFile('cv')) {
+            $filename = $request->cv->getClientOriginalName();
+            $extension = $request->cv->getClientOriginalExtension();
+            $request->cv->storeAs('cv', $company->id . '_co.' . $extension, 'public');
+            $company->cv = Storage::url('cv/' . $company->id . '_co.' . $extension);
+            $company->save();
+        }
+
         return redirect()->back()->with('success', 'Company added successfully');
     }
 
@@ -67,7 +75,15 @@ class CompanyController extends Controller
             $company->avatar = Storage::url('avatars/' . $company->id . '.' . $extension);
             $company->save();
         }
-        
+
+        if ($request->hasFile('cv')) {
+            $filename = $request->cv->getClientOriginalName();
+            $extension = $request->cv->getClientOriginalExtension();
+            $request->cv->storeAs('cv', $company->id . '_co.' . $extension, 'public');
+            $company->cv = Storage::url('cv/' . $company->id . '_co.' . $extension);
+            $company->save();
+        }
+
         return redirect()->back()->with('success', 'Company updated successfully');
     }
 

@@ -114,6 +114,14 @@ class UserController extends Controller
             $company->save();
         }
 
+        if ($request->hasFile('company_cv')) {
+            $filename = $request->company_cv->getClientOriginalName();
+            $extension = $request->company_cv->getClientOriginalExtension();
+            $request->company_cv->storeAs('cv', $company->id . '_co.' . $extension, 'public');
+            $company->cv = Storage::url('cv/' . $company->id . '_co.' . $extension);
+            $company->save();
+        }
+
 
 
         if ($request->hasFile('avatar')) {

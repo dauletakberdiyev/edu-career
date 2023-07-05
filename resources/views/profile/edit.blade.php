@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@php 
+@php
     $user = Auth::user();
 @endphp
 <main class="main">
         <div class="container-fluid">
           <div class="page__inner">
-            
+
 
             <form method="post" enctype="multipart/form-data" action="{{ route('user.update') }}">
               <div class="d-flex justify-content-between mb-4">
@@ -24,7 +24,7 @@
                 <input type="email" class="form-control" placeholder="Enter email" name="email" value="{{ $user->email }}" disabled="disabled">
               </div>
               <div class="custom-form-control">
-        
+
                 <label>First Name</label>
                 <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" value="{{ $user->firstname }}">
               </div>
@@ -37,13 +37,13 @@
                 <input type="file" class="form-control-file" name="avatar" accept="image/jpeg,image/png,image/gif">
               </div>
 
-              @if($user->cv != null) 
+              @if($user->cv != null)
               <div class="custom-form-control">
                 <div class="form-group group-profile">
                     <label class="mb-0">Your CV</label>
                     <a href="{{ $user->cv }}" download >Click here to download your cv</a>
-                </div>     
-              </div>   
+                </div>
+              </div>
               @endif
               @role('student')
               <div class="custom-form-control">
@@ -52,12 +52,12 @@
               </div>
               @endrole
             </form>
-        
+
             @role('company')
-            @php 
+            @php
               $company = $user->company;
             @endphp
-                    
+
                     <div class="page__top">
                         <h3 class="page__title">Update Company</h3>
                     </div>
@@ -94,6 +94,11 @@
                         <div class="fill-group">
                             <label>Logo</label>
                             <input type="file" name="company_avatar" class="form-control-file" accept="image/jpeg,image/png,image/gif">
+                        </div>
+
+                        <div class="fill-group">
+                            <label>CV</label>
+                            <input type="file" name="cv" class="form-control-file">
                         </div>
 
                         <div class="d-flex justify-content-end">

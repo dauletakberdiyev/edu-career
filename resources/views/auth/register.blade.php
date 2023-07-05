@@ -30,7 +30,7 @@
                 <!-- <option value="teacher">Teacher</option> -->
               </select>
             </div>
-            @php 
+            @php
                 use App\Models\Faculty;
                 $faculties = Faculty::all();
             @endphp
@@ -42,7 +42,7 @@
                 @endforeach
               </select>
             </div>
-  
+
             <div class="form_column registration_column">
               <div class="form-group inline registration_group" style="margin-right: 5px;">
                 <input id="email_input" type="email" class="form-control" placeholder="Enter email" name="email" required="" onchange="addEmailPattern()">
@@ -78,12 +78,12 @@
             </div>
 
             <!-- <input type="file" class="form-control-file" name="picture"> -->
-           
-           
+
+
 
             <div id="company_profile" onload="hideCompanyProfile()">
                 <h3 style="color: white">Company profile</h3>
-    
+
                 <div class="form_column registration_column">
                     <div class="form-group inline registration_group" style="margin-right: 5px;">
                         <input type="text" class="form-control" placeholder="Enter company name" name="company_name" id="company_name">
@@ -96,13 +96,20 @@
                         <textarea type="text" class="form-control" value="Enter company description" name="company_description" id="company_description">
                         </textarea>
                     </div>
-        
+
                     <div class="form_column registration_column">
                       <div class="form-group inline registration_group" style="margin-right: 5px;">
                         <span class="text-info">Required / Обязательно загрузить фото</span>
                         <input name="company_avatar" id="company_avatar" type="file">
                       </div>
                     </div>
+
+                    <div class="form_column registration_column">
+                        <div class="form-group inline registration_group" style="margin-right: 5px;">
+                          <span class="text-info">CV Required / Обязательно загрузить CV</span>
+                          <input name="company_cv" id="company_cv" type="file">
+                        </div>
+                      </div>
                 </div>
             </div>
             <div class="form-group">
@@ -113,11 +120,11 @@
             </div>
           </form>
         </div>
-  
+
       </div>
-  
+
       <img src="{{ asset('/images/login/background-login.png') }}" alt="background-image" class="bg-img">
-  
+
     </div>
   </div>
     <script>
@@ -135,6 +142,7 @@
             var co_address = document.getElementById('company_address');
             var co_description = document.getElementById('company_description');
             var co_avatar = document.getElementById('company_avatar');
+            var co_cv = document.getElementById('company_cv');
 
             email.removeAttribute('pattern');
             email.removeAttribute('title');
@@ -143,7 +151,8 @@
             co_address.removeAttribute('required');
             co_description.removeAttribute('required');
             co_avatar.removeAttribute('required');
-            
+            co_cv.removeAttribute('required');
+
 
             if (optionVal == "company") {
                 document.getElementById("company_profile").style.display = "block";
@@ -151,10 +160,11 @@
                 co_address.setAttribute('required', '');
                 co_description.setAttribute('required', '');
                 co_avatar.setAttribute('required', '');
+                co_cv.setAttribute('required', '');
             } else if (optionVal == "student") {
                 email.setAttribute('pattern', "\\d{9}@stu\\.sdu\\.edu\\.kz");
                 email.setAttribute('title', 'Please use your student email (Ex. 200103022@stu.sdu.edu.kz)')
-                
+
                 document.getElementById("user_faculty").required = true;
                 document.getElementById("user_faculty").style.display = "";
                 document.getElementById("company_profile").style.display = "none";
@@ -164,9 +174,9 @@
                 document.getElementById("company_profile").style.display = "none";
             }
         }
-        
+
         function addEmailPattern() {
-            
+
         }
     </script>
 </body>
