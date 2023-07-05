@@ -8,38 +8,39 @@
         <div class="container-fluid">
           <div class="page__inner">
             <div class="main__title mb-3">Profile</div>
-        
+
             <div class="d-flex align-items-center mb-4">
               <img src="{{ $user->avatar }}" width="80" height="80" class="profile-img">
             </div>
-        
+
             <div class="form-group group-profile">
               <label class="mb-0">Email</label>
               <span class="flex9 text-secondary">
                   {{ $user->email }}
                 </span>
             </div>
-        
+
             <div class="form-group group-profile">
               <label class="mb-0">First name</label>
               <span class="flex9 text-secondary">
                     {{ $user->firstname }}
                 </span>
             </div>
-        
+
             <div class="form-group group-profile">
               <label class="mb-0">Last name</label>
               <span class="flex9 text-secondary">
                 {{ $user->lastname }}
                 </span>
             </div>
-        
+            @if(isset($user->faculty))
             <div class="form-group group-profile">
               <label class="mb-0">Faculty</label>
               <span class="flex9 text-secondary">
                 {{ $user->faculty->name }}
                   </span>
             </div>
+            @endif
             @if($user->cv != null)
             <div class="form-group group-profile">
               <label class="mb-0">CV</label>
@@ -53,7 +54,7 @@
             @endphp
             @if($company != null)
             <div class="main__title mb-3">Company: {{ $company->name }}</div>
-        
+
             <div class="d-flex align-items-center mb-4">
               <img src="{{ $company->avatar }}" width="80" height="80" class="profile-img">
             </div>
