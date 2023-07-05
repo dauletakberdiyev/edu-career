@@ -44,19 +44,19 @@ class UserController extends Controller
         } else if($request->role == 'admin'){
             $user = User::role('admin')->paginate(20);
             return new UserResource($user);
-        } else { 
+        } else {
             $user = User::orderBy('created_at', 'desc')->paginate(10);
             return new UserResource($user);
         }
     }
-    
+
      /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * 
-     * @urlParam name 
+     *
+     * @urlParam name
      * @urlParam email
      * @urlParam password
      * @urlParam role
@@ -114,7 +114,7 @@ class UserController extends Controller
             $company->save();
         }
 
-        
+
 
         if ($request->hasFile('avatar')) {
             $filename = $request->avatar->getClientOriginalName();
@@ -130,7 +130,7 @@ class UserController extends Controller
         }
         return redirect()->back()->with('success', 'User created successfully');
     }
-    
+
      /**
      * Display the specified resource.
      *
@@ -173,7 +173,7 @@ class UserController extends Controller
             $user->cv = Storage::url('cv/' . $user->id . '.' . $extension);
             $user->save();
         }
-        
+
         return redirect()->back()->with('success', 'User updated successfully');
     }
 
@@ -183,8 +183,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(int $id)
     {
+        $user = User::find($id);
         $user->delete();
 
         return response(['message' => 'Deleted']);

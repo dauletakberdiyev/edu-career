@@ -6,7 +6,7 @@
           <div class="page__inner">
             <div class="page__top flex-wrap">
               <h3 class="page__title">Manage Staffs</h3>
-          
+
               <a class="btn btn-outline-primary" href="{{ route('staff.add') }}">Add Staff</a>
             </div>
             <div class="table-outer">
@@ -20,6 +20,7 @@
                       <th>Image</th>
                       <th>Edit</th>
                       <th>Profile</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody class="text-dark">
@@ -37,9 +38,9 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route('dt_staff') }}',
-            
+
             columnDefs: [
-              {  
+              {
                 "targets": "_all",
               },
             ],
@@ -48,27 +49,33 @@
                 { "width": "30%" },
                 { "width": "10%" },
                 { "width": "30%" },
-                { 
+                {
                   "width": "30%",
                   "render": function ( url, type, full) {
                     return '<a href="'+full[4]+'" target="_blank">see avatar</a>';
                   },
                  },
-                { 
+                {
                   "width": "30%",
                   "render": function ( url, type, full) {
                     return '<a href="'+full[5]+'" class="table-tool">edit</a>';
                   },
                 },
-                { 
+                {
                   "width": "30%",
                   "render": function ( url, type, full) {
                     return '<a href="'+full[6]+'" class="table-tool">profile</a>';
                   },
                 },
+                {
+                  "width": "30%",
+                  "render": function ( url, type, full) {
+                    return '<a href="'+full[7]+'" class="table-tool">delete</a>';
+                  },
+                },
             ],
         });
-        
+
         $('#order-table tbody').on('click', 'tr', function() {
             //var data = table.row(this).data();
             //var url = '';
@@ -77,6 +84,6 @@
         });
     });
 
-    
+
 </script>
 @endsection

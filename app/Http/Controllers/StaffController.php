@@ -56,7 +56,8 @@ class StaffController extends Controller
                 $fn,
                 $user->avatar,
                 route('staff.update', ['id' => $user->id]),
-                route('student.profile', ['id' => $user->id]),  
+                route('student.profile', ['id' => $user->id]),
+                route('user.delete', ['id' => $user->id]),
             ]);
         }
         return Datatables::of($data)->make();
