@@ -8,6 +8,6 @@
     <title>Edu career</title>
 </head>
   <body>
-    {{$data->message}}
+    {{$data['message']}}
   </body>
 </html>

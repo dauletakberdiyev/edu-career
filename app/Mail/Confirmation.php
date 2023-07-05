@@ -32,7 +32,7 @@ class Confirmation extends Mailable
     public function build()
     {
         return $this
-            ->to($this->data->user_mail)
+            ->to($this->data['user_mail'])
             ->subject('Vacancy confirmation | Edu career')
             ->view('mails.confirmation')
             ->with('data',$this->data);
