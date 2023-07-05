@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Company;
 use App\Models\Vacancy;
 use App\Models\Faculty;
+use App\Models\User;
+
+use App\Mail\Confirmation;
 
 class VacancyController extends Controller
 {
@@ -112,6 +116,13 @@ class VacancyController extends Controller
         $vacancy->applicants()->updateExistingPivot($request->user_id, ['status' => 1]);
         $vacancy->quota = $vacancy->quota - 1;
         $vacancy->save();
+
+        $user_mail =  User::find($request->user_id)->email;
+        $message = "You've been approved to the vacancy: {$vacancy->title}";
+        $data = [];
+        $data['user_mail'] = $user_mail;
+        $data['message'] = $message;
+        Mail::send(new Confirmation($data));
         return response()->json(['message' => 'You have approved successfully']);
     }
 
@@ -123,6 +134,12 @@ class VacancyController extends Controller
         }
         $vacancy->applicants()->updateExistingPivot($request->user_id, ['status' => 2]);
 
+        $user_mail =  User::find($request->user_id)->email;
+        $message = "You've been rejected to the vacancy: {$vacancy->title}";
+        $data = [];
+        $data['user_mail'] = $user_mail;
+        $data['message'] = $message;
+        Mail::send(new Confirmation($data));
 
         return response()->json(['message' => 'You have rejected successfully']);
     }
@@ -134,6 +151,14 @@ class VacancyController extends Controller
             $vacancy->save();
         }
         $vacancy->applicants()->updateExistingPivot($request->user_id, ['status' => 0]);
+
+        $user_mail =  User::find($request->user_id)->email;
+        $message = "Your application to the vacancy: {$vacancy->title} is pending";
+        $data = [];
+        $data['user_mail'] = $user_mail;
+        $data['message'] = $message;
+        Mail::send(new Confirmation($data));
+
         return response()->json(['message' => 'You have pending successfully']);
     }
 }
