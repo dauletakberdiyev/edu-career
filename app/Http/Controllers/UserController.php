@@ -188,7 +188,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return response(['message' => 'Deleted']);
+        return redirect()->back()->with('success', 'User deleted successfully');
     }
 
     public function profile_edit() {
