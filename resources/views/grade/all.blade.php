@@ -19,7 +19,7 @@
                     @role('company')
                         Supervisor mark should be in range 0-40. Maximum point is 40.
                     @endrole
-                    
+
                 </span>
                 <table id="table"  class="table main-table table-striped">
                   <thead>
@@ -35,11 +35,13 @@
                   <tbody class="text-dark">
                     @foreach($grades as $grade)
                         <tr>
-                            @php 
+                            @php
                                 $user = $grade->user;
                             @endphp
                             <th>
-                                {{ $user->email }}
+                                @isset($user->email)
+                                    {{ $user->email }}
+                                @endisset
                             </th>
                             <th>
                                 {{ $user->firstname }} {{ $user->lastname }}
@@ -53,13 +55,13 @@
                                 @else
                                     {{ $grade->final }}
                                 @endrole
-                                
+
                             </th>
                             <th>
                                 @role('admin|coordinator|company')
                                     <input type="number" class="form-control" name="supervisormark-{{ $grade->id }}" value="{{ $grade->supervisor }}" onchange="updateSupervisorMark({{ $grade->id }})">
                                 @else
-                                    {{ $grade->supervisor }}    
+                                    {{ $grade->supervisor }}
                                 @endrole
                             </th>
                             <th>
@@ -85,7 +87,7 @@
         $.ajax({
             url: "{{ route('grade.updateSupervisorMark') }}",
             type: 'POST',
-            data: {   
+            data: {
                 "_token": "{{ csrf_token() }}",
                 id: id,
                 mark: mark
@@ -102,7 +104,7 @@
         $.ajax({
             url: "{{ route('grade.updateFinalMark') }}",
             type: 'POST',
-            data: {   
+            data: {
                 "_token": "{{ csrf_token() }}",
                 id: id,
                 mark: mark
