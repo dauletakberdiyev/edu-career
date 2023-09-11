@@ -44,7 +44,9 @@
                                 @endisset
                             </th>
                             <th>
-                                {{ $user->firstname }} {{ $user->lastname }}
+                                @isset($user->firstname)
+                                    {{ $user->firstname }} {{ $user->lastname }}
+                                @endisset
                             </th>
                             <th>
                                 {{ $grade->report }}
