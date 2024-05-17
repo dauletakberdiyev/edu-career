@@ -30,6 +30,8 @@ class User extends Authenticatable
         'email',
         'password',
         'cv',
+        'internship_plan',
+        'timetable',
     ];
 
     /**
@@ -49,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'timetable' => 'array',
     ];
 
     public function reports()
@@ -95,7 +98,7 @@ class User extends Authenticatable
             $grade += $report->pivot->mark;
         }
 
-        return $grade * 0.01;
+        return $grade;
     }
 
     public function feedback()

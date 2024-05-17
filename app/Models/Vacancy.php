@@ -9,7 +9,7 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'quota', 'company_id'];
+    protected $fillable = ['title', 'description', 'quota', 'company_id', 'term_id'];
     protected $table = 'vacancy';
 
     public function company() {
@@ -22,5 +22,9 @@ class Vacancy extends Model
 
     public function faculty() {
         return $this->belongsTo(Faculty::class);
+    }
+
+    public function term() {
+        return $this->belongsTo(Term::class);
     }
 }

@@ -26,10 +26,12 @@
                       </td>
                       <td>{{ $report->detail }}</td>
                       <td>{{ $report->due_date }}</td>
+                      @role('admin'|'coordinator')
                       <td>
                         <a class="btn btn-outline-primary" href="{{ route('report.edit', $report->id) }}">Edit</a>
                         <a class="btn btn-outline-primary" href="{{ route('report.delete', $report->id) }}">Delete</a>
                       </td>
+                      @endrole
                     </tr>
                     @endforeach
                   </tbody>

@@ -16,6 +16,13 @@
               </div>
               @csrf
               <input type="hidden" name="id" value="{{ $term->id }}">
+
+              <div class="">
+                <label>Active</label>
+                <input type="hidden" name="active" value="0">
+                <input type="checkbox" class="form-check-input" name="active" {{ $term->active ? 'checked' : '' }} value="1">
+
+              </div>
               <div class="custom-form-control">
                 <label>Name</label>
                 <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{ $term->name }}">

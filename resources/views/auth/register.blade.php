@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="app">
+  <div id="app" style="background-color: rgb(70,86,110);">
     <div class="login__page">
       <div class="login-inner">
         <div class="login__block registration__block">
@@ -72,8 +72,13 @@
 
             <div class="form_column registration_column">
               <div class="form-group inline registration_group" style="margin-right: 5px;">
-                <span class="text-info">Required / Обязательно загрузить фото</span>
-                <input class="" name="avatar" id="" type="file" required>
+                <span class="text-info">Photo</span>
+                <input class="" name="avatar" id="" type="file" accept="image" required>
+              </div>
+
+              <div class="form-group inline registration_group" id="student_cv">
+                <label class="text-info">CV</label>
+                <input class="" name="cv" id="s_cv" type="file" accept="pdf,doc,docx">
               </div>
             </div>
 
@@ -92,9 +97,8 @@
                         <input type="text" class="form-control" placeholder="Enter company address" name="company_address" id="company_address">
                     </div>
                     <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <label for="" style="color: white">Enter company description</label>
-                        <textarea type="text" class="form-control" value="Enter company description" name="company_description" id="company_description">
-                        </textarea>
+                        <label for="" style="color: white">Company description (max 100 words)</label>
+                        <textarea class="form-control" id="company_description" name="company_description" rows="3"></textarea>
                     </div>
 
                     <div class="form_column registration_column">
@@ -110,6 +114,18 @@
                           <input name="company_cv" id="company_cv" type="file">
                         </div>
                       </div>
+                    <div class="form_column registration_column">
+                      <div class="form-group inline registration_group" style="margin-right: 5px;">
+                        <span class="text-info">Legal registration / Юридичеикая регистрация</span>
+                        <input name="registration_certificate" id="" type="file">
+                      </div>
+                    </div>
+                    <div class="form_column registration_column">
+                      <div class="form-group inline registration_group" style="margin-right: 5px;">
+                        <span class="text-info">Договор аренды / Имения здания</span>
+                        <input name="lease_contract" id="" type="file">
+                      </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -122,8 +138,6 @@
         </div>
 
       </div>
-
-      <img src="{{ asset('/images/login/background-login.png') }}" alt="background-image" class="bg-img">
 
     </div>
   </div>
@@ -161,6 +175,8 @@
                 co_description.setAttribute('required', '');
                 co_avatar.setAttribute('required', '');
                 co_cv.setAttribute('required', '');
+                document.getElementById("student_cv").style.display = "none";
+                document.getElementById("s_cv").required = false;
             } else if (optionVal == "student") {
                 email.setAttribute('pattern', "\\d{9}@stu\\.sdu\\.edu\\.kz");
                 email.setAttribute('title', 'Please use your student email (Ex. 200103022@stu.sdu.edu.kz)')
@@ -168,10 +184,14 @@
                 document.getElementById("user_faculty").required = true;
                 document.getElementById("user_faculty").style.display = "";
                 document.getElementById("company_profile").style.display = "none";
+                document.getElementById("student_cv").style.display = "";
+                document.getElementById("s_cv").required = true;
             } else {
               document.getElementById("user_faculty").required = true;
               document.getElementById("user_faculty").style.display = "";
-                document.getElementById("company_profile").style.display = "none";
+              document.getElementById("company_profile").style.display = "none";
+              document.getElementById("student_cv").style.display = "";
+                document.getElementById("s_cv").required = true;
             }
         }
 

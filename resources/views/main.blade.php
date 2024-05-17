@@ -21,6 +21,7 @@
                   @endrole
                   </span>
                 </p>
+                <a href="{{ asset('docs/template.txt') }}" target='_blank' class="btn btn-outline-primary">Download template</a>
               </div>
             </div>
             <div class="row information__blocks">

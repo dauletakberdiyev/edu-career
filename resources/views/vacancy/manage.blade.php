@@ -26,8 +26,8 @@
                 <table class="table main-table">
                   <thead>
                   <tr>
-                    <th>Company</th>
                     <th>Name</th>
+                    <th>Company</th>
                     <th>Quota</th>
                     <th>Type</th>
                     <th>Applicants</th>
@@ -40,13 +40,13 @@
                     @foreach($vacancies as $vacancy)
                       <tr>
                         <td>
-                          <a href="{{ route('company.detail', ['id'=>$company->id]) }}" >
-                            {{ $company->name }}
+                          <a href="{{ route('vacancy.detail', ['id'=>$vacancy->id]) }}" >
+                            {{ $vacancy->title }}
                           </a>
                         </td>
                         <td>
-                          <a href="{{ route('vacancy.detail', ['id'=>$vacancy->id]) }}" >
-                            {{ $vacancy->title }}
+                          <a href="{{ route('company.detail', ['id'=>$company->id]) }}" >
+                            {{ $company->name }}
                           </a>
                         </td>
                         <td>{{ $vacancy->quota }}</td>

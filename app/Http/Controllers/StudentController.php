@@ -17,7 +17,7 @@ class StudentController extends Controller
         $user = Auth::user();
         if ($user->hasRole('admin'))
             $f_id = [1,2,3,4,5,6,7,8];
-        else if ($user->hasRole('coordinator')) 
+        else if ($user->hasRole('coordinator') || $user->hasRole('superviser')) 
             $f_id = [$user->faculty->id];
         else
             $f_id = [];
@@ -54,7 +54,7 @@ class StudentController extends Controller
         $user = Auth::user();
         if ($user->hasRole('admin'))
             $f_id = [1,2,3,4,5,6,7,8];
-        else if ($user->hasRole('coordinator')) 
+        else if ($user->hasRole('coordinator') || $user->hasRole('superviser')) 
             $f_id = [$user->faculty->id];
         else
             $f_id = [];

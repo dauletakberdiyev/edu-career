@@ -40,6 +40,8 @@
                   <thead>
                     <tr>
                       <th>Reports</th>
+                      <th>Weekly reports</th>
+                      <th>Internship plan</th>
                       <th>Presentation</th>
                       <th>Supervisor mark</th>
                       <th>Total</th>
@@ -51,13 +53,18 @@
                             {{ $grade->report }}
                         </th>
                         <th>
+                          {{ $grade->weekly_report}}
+                        </th>
+                        <th>
+                            {{ $grade->internship_plan }}
+                        <th>
                             {{ $grade->final }}
                         </th>
                         <th>
                             {{ $grade->supervisor }}
                         </th>
                         <th>
-                            {{ $grade->report + $grade->final + $grade->supervisor }}
+                            {{ $grade->report + $grade->weekly_report + $grade->internship_plan + $grade->final + $grade->supervisor }}
                         </th>
                     </tr>
                   </tbody>

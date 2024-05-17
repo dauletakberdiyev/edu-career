@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
-    protected $fillable = ['name', 'address', 'avatar', 'user_id', 'in_whitelist', 'description'];
+    protected $fillable = ['name', 'address', 'avatar', 'user_id', 'in_whitelist', 'description', 'registration_certificate', 'lease_contract', 'cv'];
 
     public function user()
     {
@@ -35,5 +35,10 @@ class Company extends Model
     public function applicants()
     {
         return $this->belongsToMany(User::class, 'user_vacancy', 'company_id', 'user_id')->withPivot('status');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(CompanyPhoto::class);
     }
 }

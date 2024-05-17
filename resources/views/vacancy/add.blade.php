@@ -33,8 +33,7 @@
                         </div>
                         <div class="fill-group">
                             <label>Description</label>
-                            <textarea type="text" class="form-control" placeholder="Enter description" name="description" v-model="lastName" required>
-                            </textarea>
+                            <textarea type="text" class="form-control" placeholder="Enter description" name="description" v-model="lastName" required></textarea>
                         </div>
 
                         <div class="fill-group">

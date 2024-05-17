@@ -23,18 +23,21 @@
                         </div>
                         <div class="fill-group">
                             <label>Description</label>
-                            <textarea type="text" class="form-control" placeholder="Enter Description" name="description" v-model="lastName">
-                                {{ $company->description }}
-                            </textarea>
+                            <textarea type="text" class="form-control" placeholder="Enter Description" name="description" v-model="lastName">{{ $company->description }}</textarea>
                         </div>
                         <div class="fill-group">
-                            <label>Picture</label>
+                            <label>Logo</label>
                             <input type="file" name="avatar" class="form-control-file" accept="image/jpeg,image/png,image/gif">
                         </div>
 
                         <div class="fill-group">
                             <label>CV</label>
                             <input type="file" name="cv" class="form-control-file">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photos">Company Photos</label>
+                            <input type="file" class="form-control" id="photos" name="photos[]" multiple>
                         </div>
 
                         <div class="d-flex justify-content-end">

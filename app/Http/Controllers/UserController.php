@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\Company;
-
+use App\Models\Term;
 
 class UserController extends Controller
 {
@@ -76,6 +76,8 @@ class UserController extends Controller
             return back()->withErrors($validator);
         }
 
+        $term = Term::where('active', '=', 1)->first();
+
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
         $user->assignRole($request->role);
@@ -100,8 +102,8 @@ class UserController extends Controller
             if ($request->hasFile('avatar')) {
                 $filename = $request->avatar->getClientOriginalName();
                 $extension = $request->avatar->getClientOriginalExtension();
-                $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
-                $company->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+                $request->avatar->storeAs('avatars/' . $term->id . '/' , $user->id . '.' . $extension, 'public');
+                $company->avatar = Storage::url('avatars/' . $term->id . '/' . $user->id . '.' . $extension);
                 $company->save();
             }
         }
@@ -109,26 +111,48 @@ class UserController extends Controller
         if ($request->hasFile('company_avatar')) {
             $filename = $request->company_avatar->getClientOriginalName();
             $extension = $request->company_avatar->getClientOriginalExtension();
-            $request->company_avatar->storeAs('avatars', $company->id . '_co.' . $extension, 'public');
-            $company->avatar = Storage::url('avatars/' . $company->id . '_co.' . $extension);
+            $request->company_avatar->storeAs('avatars/' . $term->id . '/' , $company->id . '_co.' . $extension, 'public');
+            $company->avatar = Storage::url('avatars/' . $term->id . '/'  . $company->id . '_co.' . $extension);
             $company->save();
         }
 
         if ($request->hasFile('company_cv')) {
             $filename = $request->company_cv->getClientOriginalName();
             $extension = $request->company_cv->getClientOriginalExtension();
-            $request->company_cv->storeAs('cv', $company->id . '_co.' . $extension, 'public');
-            $company->cv = Storage::url('cv/' . $company->id . '_co.' . $extension);
+            $request->company_cv->storeAs('cv/' . $term->id . '/' , $company->id . '_co.' . $extension, 'public');
+            $company->cv = Storage::url('cv/' . $term->id . '/'  . $company->id . '_co.' . $extension);
             $company->save();
         }
 
+        if ($request->hasFile('registration_certificate')) {
+            $filename = $request->registration_certificate->getClientOriginalName();
+            $extension = $request->registration_certificate->getClientOriginalExtension();
+            $request->registration_certificate->storeAs('registration_certificate/' . $term->id . '/' , $company->id . '_co.' . $extension, 'public');
+            $company->registration_certificate = Storage::url('registration_certificate/' . $term->id . '/'  . $company->id . '_co.' . $extension);
+            $company->save();
+        }
 
+        if ($request->hasFile('lease_contract')) {
+            $filename = $request->lease_contract->getClientOriginalName();
+            $extension = $request->lease_contract->getClientOriginalExtension();
+            $request->lease_contract->storeAs('lease_contract/' . $term->id . '/' , $company->id . '_co.' . $extension, 'public');
+            $company->lease_contract = Storage::url('lease_contract/' . $term->id . '/'  . $company->id . '_co.' . $extension);
+            $company->save();
+        }
 
         if ($request->hasFile('avatar')) {
             $filename = $request->avatar->getClientOriginalName();
             $extension = $request->avatar->getClientOriginalExtension();
-            $request->avatar->storeAs('avatars', $user->id . '.' . $extension, 'public');
-            $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
+            $request->avatar->storeAs('avatars/' . $term->id . '/' , $user->id . '.' . $extension, 'public');
+            $user->avatar = Storage::url('avatars/' . $term->id . '/'  . $user->id . '.' . $extension);
+            $user->save();
+        }
+
+        if ($request->has('cv')) {
+            $filename = $request->cv->getClientOriginalName();
+            $extension = $request->cv->getClientOriginalExtension();
+            $request->cv->storeAs('cv/' . $term->id . '/' , $user->id . '.' . $extension, 'public');
+            $user->cv = Storage::url('cv/' . $term->id . '/'  . $user->id . '.' . $extension);
             $user->save();
         }
 

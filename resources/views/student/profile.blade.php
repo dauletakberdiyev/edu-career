@@ -40,19 +40,91 @@
                 {{ $user->faculty->name }}
                   </span>
             </div>
+              <div class="form-group group-profile">
+                <label class="mb-0">Internship Plan (link)</label>
+                <span class="flex9 text-secondary">
+                  @if($user->internship_plan != null)
+                    <a href="{{ $user->internship_plan }}">Download internship plan</a>
+                  @else
+                    No internship plan
+                  @endif
+                </span>
+              </div>
            
             <div class="form-group group-profile">
               <label class="mb-0">CV</label>
-              @if($user->cv != null)
               <span class="flex9 text-secondary">
-              <a href="{{ $user->cv }}" download >Click here to download cv</a>
+                @if($user->cv != null)
+                  <a href="{{ $user->cv }}" download >Click here to download cv</a>
+                @else
+                  <span class="flex9 text-warning"> No CV </span>
+                @endif
               </span>
-              @else
-              <span class="flex9 text-warning"> No CV </span>
-              @endif
             </div>
            
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Timetable</h2>
+                <form id='timetable_form' action="{{ route('user.update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $user->id }}">
+                    <div class="form-group">
+                        <div id="timetable"></div>
+                        <input type="hidden" name="timetable">
+                    </div>
+                </form>
+            </div>
+        </div>
           </div>
         </div>
       </main>
+@endsection
+
+@section('scripts')
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var timetable = JSON.parse(@json($user->timetable ?? '[]'));
+    var calendarEl = document.getElementById('timetable');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay,listWeek,dayGridMonth'
+        },
+        initialView: 'timeGridWeek',
+        editable: true,
+        slotDuration: '01:00:00', 
+        slotMinTime: '06:00:00',
+        slotMaxTime: '24:00:00',
+        allDaySlot: false,
+    });
+    if (Array.isArray(timetable)) {
+            timetable.forEach(function(event) {
+                console.log(event);
+                calendar.addEvent({
+                    id: event.id,
+                    title: event.title,
+                    startTime: moment(event.startTime).format('HH:mm:ss'),
+                    endTime: moment(event.endTime).format('HH:mm:ss'),
+                    daysOfWeek: event.daysOfWeek,
+                    color: 'red'
+                });
+            });
+        }
+
+    calendar.render();
+
+  });
+</script>
+@endsection
+
+@section('styles')
+<style>
+    #timetable {
+        height: 550px;
+    }
+</style>
 @endsection

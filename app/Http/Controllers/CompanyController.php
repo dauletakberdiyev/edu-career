@@ -84,6 +84,13 @@ class CompanyController extends Controller
             $company->save();
         }
 
+        if($request->hasFile('photos')) {
+            foreach($request->file('photos') as $photo) {
+                $path = $photo->store('photos');
+                $company->photos()->create(['photo_path' => $path]);
+            }
+        }
+
         return redirect()->back()->with('success', 'Company updated successfully');
     }
 

@@ -121,7 +121,7 @@ class ReportController extends Controller
 
     public function submit()
     {
-        $report = Report::where('due_date', '>=', date('Y-m-d'))->first();
+        $report = Report::where('due_date', '>=', now())->orderBy('due_date', 'asc')->first();
 
         return view('report.submit', compact('report'));
     }

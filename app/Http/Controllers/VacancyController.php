@@ -12,6 +12,7 @@ use App\Models\Faculty;
 use App\Models\User;
 
 use App\Mail\Confirmation;
+use App\Models\Term;
 
 class VacancyController extends Controller
 {
@@ -49,12 +50,14 @@ class VacancyController extends Controller
         if ($company->in_whitelist == 0) {
             return redirect()->back()->with('error', 'Company not in whitelist');
         }
+        $term = Term::where('status', 1)->first();
         $vacancy = new Vacancy();
         $vacancy->title = $request->title;
         $vacancy->description = $request->description;
         $vacancy->quota = $request->quota;
         $vacancy->company_id = $request->company_id;
         $vacancy->faculty_id = $request->faculty_id;
+        $vacancy->term_id = $term ? $term->id : null;
         if (Auth::user()->hasRole('teacher'))
             $vacancy->type = 1;
         $vacancy->save();

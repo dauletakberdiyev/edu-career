@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="app">
+  <div id="app" style="background-color: rgb(70,86,110);">
     <div class="login__page">
       <div class="login-inner">
         <div class="login__block">
@@ -58,7 +58,7 @@
           </form>
         </div>
       </div>
-      <img src="{{ asset('images/login/background-login.png') }}" alt="" class="bg-img">
+      
     </div>
   </div>
 </body>

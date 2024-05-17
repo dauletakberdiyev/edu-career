@@ -7,7 +7,7 @@
 		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		@yield('meta')
 		<title>Educareer</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 		<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -172,7 +172,7 @@
 							</a>
 						</li>
 						@endrole
-						@role('admin')
+						@role('admin|coordinator')
 						<li class="sidebar__item">
 							<a class="sidebar__link {{ request()->routeIs(['staff', 'staff.*']) ? 'active' : '' }}" href="{{ route('staff') }}">
 								<span class="link__svg">
@@ -196,6 +196,8 @@
 								Manage staff
 							</a>
 						</li>
+						@endrole
+						@role('admin')
 						<li class="sidebar__item">
 							<a href="{{ route('admin.index') }}" class="sidebar__link">
 								<span class="link__svg">
@@ -207,7 +209,7 @@
 							</a>
 						</li>
 						<li class="sidebar__item">
-							<a href="{{ route('term.edit') }}" class="sidebar__link">
+							<a href="{{ route('term.index') }}" class="sidebar__link">
 								<span class="link__svg">
 									<svg height="512pt" viewBox="0 -20 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
 										<path d="m119 161c-22.054688 0-40 17.945312-40 40v151c0 22.054688 17.945312 40 40 40h76c22.054688 0 40-17.945312 40-40v-151c0-22.054688-17.945312-40-40-40zm76 191h-76v-151h76l.023438 151s-.003907 0-.023438 0zm236-75c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0 76c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0-152c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm21-201h-392c-33.085938 0-60 26.914062-60 60v332c0 44.113281 35.886719 80 80 80h352c44.113281 0 80-35.886719 80-80 0-11.046875-8.953125-20-20-20s-20 8.953125-20 20c0 22.054688-17.945312 40-40 40h-352c-22.054688 0-40-17.945312-40-40v-271h432v171c0 11.046875 8.953125 20 20 20s20-8.953125 20-20v-232c0-33.085938-26.914062-60-60-60zm-81 40c11.027344 0 20 8.972656 20 20s-8.972656 20-20 20-20-8.972656-20-20 8.972656-20 20-20zm100 20c0 11.027344-8.972656 20-20 20s-20-8.972656-20-20 8.972656-20 20-20 20 8.972656 20 20zm-431 0c0-11.027344 8.972656-20 20-20h254.441406c-2.222656 6.261719-3.441406 12.988281-3.441406 20 0 7.386719 1.347656 14.460938 3.800781 21h-274.800781zm0 0"></path>
@@ -216,6 +218,8 @@
 								Term settings
 							</a>
 						</li>
+						@endrole
+						@role('admin|coordinator|superviser')
 						<li class="sidebar__item">
 							<a href="{{ route('report') }}" class="sidebar__link">
 								<span class="link__svg">
@@ -259,6 +263,8 @@
 								Manage company
 							</a>
 						</li>
+						@endrole
+						@role('admin|coordinator|superviser')
 						<li class="sidebar__item">
 							<a class="sidebar__link {{ request()->routeIs(['student', 'student.*']) ? 'active' : '' }}" href="{{ route('student') }}">
 								<span class="link__svg">
@@ -410,8 +416,7 @@
 		<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 		<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		@yield('scripts')
 	</body>
 </html>

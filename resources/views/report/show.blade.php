@@ -72,8 +72,15 @@
                           {{ $applicant->pivot->mark }}
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="mark-{{ $applicant->id }}" value="{{ $applicant->pivot->mark }}" onchange="updateMark({{ $applicant->id }}, {{ $report->id }})">
+                          <select class="form-control" name="mark-{{ $applicant->id }}" onchange="updateMark({{ $applicant->id }}, {{ $report->id }})">
+                              <option value="0" @if($applicant->pivot->mark == 0) selected @endif>0</option>
+                              <option value="0.25" @if($applicant->pivot->mark == 0.25) selected @endif>0.25</option>
+                              <option value="0.5" @if($applicant->pivot->mark == 0.5) selected @endif>0.5</option>
+                              <option value="0.75" @if($applicant->pivot->mark == 0.75) selected @endif>0.75</option>
+                              <option value="1" @if($applicant->pivot->mark == 1) selected @endif>1</option>
+                          </select>
                         </td>
+
                       </tr>
                       @endforeach
                   </tbody>
@@ -106,7 +113,7 @@ $(document).ready(function() {
 });
 
 function updateMark(id, report_id) {
-  var mark = $('input[name=mark-' + id + ']').val();
+  var mark = $('select[name=mark-' + id + ']').val();
   $.ajax({
     url: "{{ route('report.updateMark') }}",
     type: 'POST',
@@ -118,6 +125,7 @@ function updateMark(id, report_id) {
     },
     success: function(data) {
       console.log(data['success']);
+      alert('success');
     }
   });
 }

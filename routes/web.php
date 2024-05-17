@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\RegistrationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,9 +45,11 @@ Route::group(['prefix' => 'feedback', 'middleware' => ['auth'], 'controller' => 
 Route::group(['prefix' => 'grades', 'middleware' => ['auth'], 'controller' => GradeController::class], function () {
     Route::get('/', 'index')->name('grade.index');
     Route::get('/all', 'grades')->middleware('role:admin|coordinator|company')->name('grade.all');
-    Route::group(['middleware' => ['role:admin|coordinator']], function () {
+    Route::group(['middleware' => ['role:admin|coordinator|supervisor']], function () {
         Route::get('/{id}', 'show')->name('grade.show');
         Route::post('/updateFinalMark', 'updateFinalMark')->name('grade.updateFinalMark');
+        Route::post('/updateFinalMark', 'updateFinalMark')->name('grade.updateFinalMark');
+        Route::post('/updateMark', 'updateMark')->name('grade.updateMark');
     });
     Route::post('/updateSupervisorMark', 'updateSupervisorMark')->middleware('role:admin|coordinator|company')->name('grade.updateSupervisorMark');
 });
@@ -64,7 +67,7 @@ Route::group(['prefix' => 'report', 'middleware' => ['auth']], function () {
     Route::get('/submit', [App\Http\Controllers\ReportController::class, 'submit'])->name('report.submit');
     Route::post('/reportAdd', [App\Http\Controllers\ReportController::class, 'reportAdd'])->name('report.addSubmit');
 
-    Route::group(['middleware' => ['role:admin|coordinator']], function () {
+    Route::group(['middleware' => ['role:admin|coordinator|superviser']], function () {
         Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
         Route::get('/add', [App\Http\Controllers\ReportController::class, 'create'])->name('report.add');
         Route::post('/store', [App\Http\Controllers\ReportController::class, 'store'])->name('report.store');
@@ -91,12 +94,14 @@ Route::group(['prefix' => 'company', 'middleware' => ['auth']], function () {
         Route::get('/', [App\Http\Controllers\CompanyController::class, 'index'])->name('company');
         Route::get('/add', [App\Http\Controllers\CompanyController::class, 'add'])->name('company.add');
         Route::get('/update/{id}', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');
-        Route::post('/updateform', [App\Http\Controllers\CompanyController::class, 'update_form'])->name('company.update.form');
         Route::post('/search', [App\Http\Controllers\CompanyController::class, 'search'])->name('company.search');
 
         Route::post('/addform', [App\Http\Controllers\CompanyController::class, 'add_form'])->name('company.add.form');
         Route::post('/approve', [App\Http\Controllers\CompanyController::class, 'approve'])->name('company.approve');
         Route::post('/reject', [App\Http\Controllers\CompanyController::class, 'reject'])->name('company.reject');
+    });
+    Route::group(['middleware' => ['role:admin|coordinator|company']], function() {
+        Route::post('/updateform', [App\Http\Controllers\CompanyController::class, 'update_form'])->name('company.update.form');
     });
 
     Route::get('/{id}', [App\Http\Controllers\CompanyController::class, 'detail'])->name('company.detail');
@@ -134,7 +139,8 @@ Route::group(['prefix' => 'registration', 'middleware' => ['auth']], function ()
 });
 
 Route::group(['prefix' => 'term', 'middleware' => ['auth', 'role:admin|coordinator']], function () {
-    Route::get('/edit', [App\Http\Controllers\TermController::class, 'edit'])->name('term.edit');
-
+    Route::get('/', [App\Http\Controllers\TermController::class, 'index'])->name('term.index');
+    Route::get('/edit/{term}', [App\Http\Controllers\TermController::class, 'edit'])->name('term.edit');
+    Route::post('/store', [App\Http\Controllers\TermController::class, 'store'])->name('term.store');
     Route::post('/update', [App\Http\Controllers\TermController::class, 'update'])->name('term.update');
 });

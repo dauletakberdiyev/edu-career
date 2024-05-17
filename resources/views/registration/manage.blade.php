@@ -57,9 +57,9 @@
                                 <tr>
                                     <td>{{ $reg->user->firstname }} {{ $reg->user->lastname }}</td>
                                     <td>{{ $reg->user->email }}</td>
-                                    <td>{{ $reg->vacancy->company->user->email }}</td>
+                                    <td>{{ $reg->vacancy != null ? $reg->vacancy->company->user->email : '-' }}</td>
                                     <td>
-                                        @if($reg->vacancy->type == 0)
+                                        @if($reg->vacancy != null && $reg->vacancy->type == 0)
                                             Industrial
                                         @else
                                             Academic
@@ -99,23 +99,20 @@
                         </table>
                     </div>
 
+                    
                     <div class="align-content-center justify-content-center d-flex">
                         <ul class="pagination">
-                            <li>
-                                <button class="btn btn-outline-primary"> < </button>
-                            </li>
-                            <li>
-                                <button class="btn btn-outline-primary">1</button>
-                            </li>
-                            <li>
-                                <button class="btn btn-outline-primary">2</button>
-                            </li>
-                            <li>
-                                <button class="btn btn-outline-primary">3</button>
-                            </li>
-                            <li>
-                                <button class="btn btn-outline-primary"> > </button>
-                            </li>
+                        <li>
+                            <a class="btn btn-outline-primary" href="{{ $registrations->previousPageUrl() }}"> < </a>
+                        </li>
+                        @for ($i = 1; $i <= $registrations->lastPage(); $i++)
+                        <li>
+                            <a class="btn btn-outline-primary {{ ($registrations->currentPage() == $i) ? ' active' : '' }}" href="{{ $registrations->url($i) }}"> {{ $i }}</a>
+                        </li>
+                        @endfor
+                        <li>
+                            <a class="btn btn-outline-primary" href="{{ $registrations->nextPageUrl() }}"> > </a>
+                        </li>
                         </ul>
                     </div>
                 </div>
