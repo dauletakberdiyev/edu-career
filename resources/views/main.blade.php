@@ -32,7 +32,7 @@
                   <span class="information__title">EDU Career</span>
                 </div>
                 <p class="information__subtitle">
-                  EDU Career is a special course for fourth year students (or third year students coming after college or NIS) that covers all elective courses of the penultimate semester (the one before last) of a study program. EDU Career is optional and has its own requirements described in the next sections. The number of students that are admitted to EDU Career is limited.
+                  EDU Career is a special course for fourth year students (or third year students coming after college or NIS) that covers all elective courses of the penultimate semester (the one before last) of a study program.
                 </p>
               </div>
 
@@ -57,25 +57,54 @@
                   <span class="information__title">Duration</span>
                 </div>
                 <p class="information__subtitle">
-                  The duration of EDU Career is 15 weeks. It starts in September {{now()->year}}, and ends in December {{now()->year}}.
+                  The duration of EDU Career is 15 weeks during Fall Semester. It starts in September and ends in December.
                 </p>
               </div>
 
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
                   <img src="./images/main/home/pollution.png" alt="pollution" class="information__img">
-                  <span class="information__title">Requirements</span>
+                  <span class="information__title">Requirements for a candidate</span>
                 </div>
                 <p class="information__subtitle">
-                  There are three departments of EDU Career. Each department has its own GPA requirements. They are the following:
+                  There is a GPA requirement for students who wish to participate in the "EDU Career" program:                </p>
+                <ul class="information__list">
+                  <li>Language Department - equal or more than 3.2</li>
+                  <li>Natural Sciences Department - equal or more than 3.2</li>
+                  <li>Humanities Department - equal or more than 3.3</li>
+                </ul>
+              </div>
+
+              <div class="col-lg-4 col-md-12 px-4 information__block">
+                <div class="information__top">
+                  <img src="./images/main/home/pollution.png" alt="pollution" class="information__img">
+                  <span class="information__title">Requirements for an educational organization</span>
+                </div>
+                <p class="information__subtitle">
+                There are requirements to any organization to take part in the “EDU Career” program:
                 </p>
                 <ul class="information__list">
-                  <li>Language Department - equal or more than 3.5</li>
-                  <li>Natural Sciences Department - equal or more than 3.5</li>
-                  <li>Humanities Department - equal or more than 3.0</li>
+                  <li>Organization has to be registered as a juridical organization.</li>
+                  <li>Organization has to possess/rent a building more than 150 m2</li>
+                  <li>Organization has to have more than 15 full-time teaching employees</li>
+                  <li>Organization has to have clean tax history</li>
+                  <li>Organization has not violated obligations regarding the internship in the previous year (mentorship and  workload)</li>
                 </ul>
+              </div>
 
-
+              <div class="col-lg-4 col-md-12 px-4 information__block">
+                <div class="information__top">
+                  <img src="./images/main/home/wind-engine.png" alt="wind" class="information__img">
+                  <span class="information__title">Limitations</span>
+                </div>
+                <p class="information__subtitle">
+                  For {{now()->year}}-{{now()->year + 1}} academic year, the limitations are the following
+                </p>
+                <ul class="information__list">
+                  <li>Total number of students for Language Department - 25</li>
+                  <li>Total number of students for Natural Sciences Department - 45</li>
+                  <li>Total number of students for Humanities Department - 55</li>
+                </ul>
               </div>
 
               <div class="col-lg-4 col-md-12 px-4 information__block">
@@ -84,7 +113,7 @@
                   <span class="information__title">Grading Policy</span>
                 </div>
                 <p class="information__subtitle">
-                  There are three types of assessment at EDU Career. They are the following:
+                  There are five types of assessment at EDU Career. They are the following:
                 </p>
 
                 <div class="table-over">
@@ -100,20 +129,20 @@
                       <tr>
                         <td>Formative Assessment of Internship</td>
                         <td>40</td>
-                        <td>Mentor</td>
+                        <td>Mentor (әдіскер)</td>
                       </tr>
                       <tr>
                         <td>Internship plan</td>
                         <td>10</td>
-                        <td>Edu Career Coordinator</td>
+                        <td>SDU Supervisor</td>
                       </tr>
                       <tr>
                         <td>Reports (video report, daily week on platform youtube or instagram)</td>
                         <td>15</td>
-                        <td>Edu Career Coordinator</td>
+                        <td>SDU Supervisor</td>
                       </tr>
                       <tr>
-                        <td>Weekly work plan</td>
+                        <td>Project work</td>
                         <td>15</td>
                         <td>Edu Career Coordinator</td>
                       </tr>
@@ -126,19 +155,52 @@
                   </table>
                 </div>
               </div>
+
               <div class="col-lg-4 col-md-12 px-4 information__block">
                 <div class="information__top">
-                  <img src="./images/main/home/wind-engine.png" alt="wind" class="information__img">
-                  <span class="information__title">Limitations</span>
+                  <img src="./images/main/home/cogwheel.png" alt="cogwheel" class="information__img">
+                  <span class="information__title">Important dates</span>
                 </div>
                 <p class="information__subtitle">
-                  For {{now()->year}}-{{now()->year + 1}} academic year, the limitations are the following
+                  There are six important date periods. They are the following:
                 </p>
-                <ul class="information__list">
-                  <li>Total number of students for Language Department - 25</li>
-                  <li>Total number of students for Natural Sciences Department - 45</li>
-                  <li>Total number of students for Humanities Department - 55</li>
-                </ul>
+
+                <div class="table-over">
+                  <table class="table table-bordered main-table">
+                    <thead>
+                    <tr>
+                      <th>Dates</th>
+                      <th>Process</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Beginning of the May</td>
+                        <td>Start for organizations’ registration</td>
+                      </tr>
+                      <tr>
+                        <td>After FX exams (end of the June)</td>
+                        <td>Start for candidates registration</td>
+                      </tr>
+                      <tr>
+                        <td>End of June - End of July For 24-25 academc year: 24.06 - 26.07</td>
+                        <td>Application period</td>
+                      </tr>
+                      <tr>
+                        <td>End of July  - Mid of August For 24-25 academc year: 26.07 - 16.08</td>
+                        <td>Agreements period</td>
+                      </tr>
+                      <tr>
+                        <td>Mid of August - End of August For 24-25 academc year: 19.08 - 28.08</td>
+                        <td>Portal registration</td>
+                      </tr>
+                      <tr>
+                        <td>The first two weeks of internship 1.09 - 13.09</td>
+                        <td>ADD/DROP period (only going back to main track at SDU)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

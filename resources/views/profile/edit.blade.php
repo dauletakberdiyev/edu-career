@@ -90,8 +90,20 @@
                             <input type="text" class="form-control" placeholder="Enter Address" name="address" v-model="lastName" value="{{ $company->address }}">
                         </div>
                         <div class="fill-group">
+                            <label>Type</label>
+                            <select name="type" class="form-control" required>
+                                <option value="" disabled selected>Select company type</option>
+                                <option value="Educational Organization" @if($company->type == 'Educational Organization') selected @endif>Educational Organization</option>
+                                <option value="Company in other industry" @if($company->type == 'Company in other industry') selected @endif>Company in other industry</option>
+                            </select>
+                        </div>
+                        <div class="fill-group">
                             <label>Description</label>
                             <textarea type="text" class="form-control" placeholder="Enter Description" name="description" v-model="lastName">{{ $company->description }}</textarea>
+                        </div>
+                        <div class="fill-group">
+                            <label>Instagram</label>
+                            <input type="text" class="form-control" placeholder="Instagram profile" name="instagram" value="{{ $company->instagram }}">
                         </div>
                         <div class="fill-group">
                             <label>Logo</label>

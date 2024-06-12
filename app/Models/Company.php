@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
-    protected $fillable = ['name', 'address', 'avatar', 'user_id', 'in_whitelist', 'description', 'registration_certificate', 'lease_contract', 'cv'];
+    protected $fillable = ['name', 'address', 'type', 'avatar', 'user_id', 'in_whitelist', 'description', 'registration_certificate', 'lease_contract', 'cv', 'instagram'];
 
     public function user()
     {

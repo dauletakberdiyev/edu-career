@@ -88,7 +88,8 @@ class UserController extends Controller
                 'name' => $request->company_name,
                 'description' => $request->company_description,
                 'address' => $request->company_address,
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'instagram' => $request->has('instagram') ? $request->instagram : null,
             ]);
         }
 
@@ -155,11 +156,10 @@ class UserController extends Controller
             $user->cv = Storage::url('cv/' . $term->id . '/'  . $user->id . '.' . $extension);
             $user->save();
         }
+        
+        Auth::login($user);
+        return redirect()->route('home');
 
-        if ($request->login == 1) {
-            Auth::login($user);
-            return back();
-        }
         return redirect()->back()->with('success', 'User created successfully');
     }
 

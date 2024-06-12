@@ -5,199 +5,197 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
   <title>Registration</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+        background-color: #2D3270;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+    }
+    .container {
+        max-width: 600px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+    .form {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #ffffff;
+    }
+    .form-control::placeholder {
+        color: #ffffff;
+        opacity: 1;
+    }
+    .form-group label {
+        color: whitesmoke; /* Makes the text color white */
+        display: block; /* Ensures the label appears on a new line, above the input */
+        margin-bottom: 5px; /* Adds space between the label and the input */
+    }
+    .form-control-file {
+        display: block;
+        width: 100%; /* Makes the input take the full width of its container */
+    }
+    .btn-outline-info {
+        border-color: #ffffff;
+        color: #ffffff;
+    }
+    .btn-outline-info:hover {
+        background-color: #ffffff;
+        color: #2D3270;
+    }
+    .reset__link, .reset__link:visited {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    .reset__link:hover {
+        color: #ddd;
+    }
+    .hidden {
+        display: none;
+    }
+  </style>
 </head>
 <body>
-  <div id="app" style="background-color: rgb(70,86,110);">
+  <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="login__page">
-      <div class="login-inner">
-        <div class="login__block registration__block">
-          <form  method="POST" action="{{ route('user.add') }}" enctype="multipart/form-data">
-            @csrf
-            <h1 class="form__title">Sign up</h1>
-            <input type="hidden" name="login" value="1">
-            <div class="form-group registration_group">
-              <select name="role" class="form-control" id="user_type" onchange="showCompanyFields()" required="">
-                <option value="" disabled="" selected="">Select your position</option>
-                <option value="student">Student</option>
-                <option value="company">Company</option>
-                <!-- <option value="teacher">Teacher</option> -->
-              </select>
-            </div>
-            @php
-                use App\Models\Faculty;
-                $faculties = Faculty::all();
-            @endphp
-            <div class="form-group registration_group">
-              <select name="faculty_id" class="form-control" id="user_faculty" onchange="">
-                <option value="" disabled="" selected="">Select your faculty</option>
-                @foreach($faculties as $faculty)
-                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
-                @endforeach
-              </select>
-            </div>
+      <form class="form container rounded" method="POST" action="{{ route('user.add') }}" enctype="multipart/form-data">
+        @csrf
+        <h1 class="form__title mb-4">Sign up</h1>
 
-            <div class="form_column registration_column">
-              <div class="form-group inline registration_group" style="margin-right: 5px;">
-                <input id="email_input" type="email" class="form-control" placeholder="Enter email" name="email" required="" onchange="addEmailPattern()">
-                @error('email')
-                    <span class="" role="alert">
-                        <strong style="color: red">{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="form-group inline registration_group">
-                <input type="password" class="form-control" placeholder="Enter password" name="password" required="">
-              </div>
-              <div class="form-group inline registration_group" style="margin-right: 5px;">
-                <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" required="">
-              </div>
-              <div class="form-group inline registration_group">
-                <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname" required="">
-              </div>
-              <div class="form-group inline registration_group" id="gender">
-                <select name="gender" class="form-control">
-                  <option value="" disabled="" selected="">Your gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-                </div>
-            </div>
-
-            <div class="form_column registration_column">
-              <div class="form-group inline registration_group" style="margin-right: 5px;">
-                <span class="text-info">Photo</span>
-                <input class="" name="avatar" id="" type="file" accept="image" required>
-              </div>
-
-              <div class="form-group inline registration_group" id="student_cv">
-                <label class="text-info">CV</label>
-                <input class="" name="cv" id="s_cv" type="file" accept="pdf,doc,docx">
-              </div>
-            </div>
-
-            <!-- <input type="file" class="form-control-file" name="picture"> -->
-
-
-
-            <div id="company_profile" onload="hideCompanyProfile()">
-                <h3 style="color: white">Company profile</h3>
-
-                <div class="form_column registration_column">
-                    <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <input type="text" class="form-control" placeholder="Enter company name" name="company_name" id="company_name">
-                    </div>
-                    <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <input type="text" class="form-control" placeholder="Enter company address" name="company_address" id="company_address">
-                    </div>
-                    <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <label for="" style="color: white">Company description (max 100 words)</label>
-                        <textarea class="form-control" id="company_description" name="company_description" rows="3"></textarea>
-                    </div>
-
-                    <div class="form_column registration_column">
-                      <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <span class="text-info">Required / Обязательно загрузить фото</span>
-                        <input name="company_avatar" id="company_avatar" type="file">
-                      </div>
-                    </div>
-
-                    <div class="form_column registration_column">
-                        <div class="form-group inline registration_group" style="margin-right: 5px;">
-                          <span class="text-info">CV Required / Обязательно загрузить CV</span>
-                          <input name="company_cv" id="company_cv" type="file">
-                        </div>
-                      </div>
-                    <div class="form_column registration_column">
-                      <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <span class="text-info">Legal registration / Юридичеикая регистрация</span>
-                        <input name="registration_certificate" id="" type="file">
-                      </div>
-                    </div>
-                    <div class="form_column registration_column">
-                      <div class="form-group inline registration_group" style="margin-right: 5px;">
-                        <span class="text-info">Договор аренды / Имения здания</span>
-                        <input name="lease_contract" id="" type="file">
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-outline-info login-btn">Sign up</button>
-            </div>
-            <div class="form-group">
-              <a class="reset__link" href="{{ route('login') }}">Already have an account? Login</a>
-            </div>
-          </form>
+        <div class="form-group mb-3">
+          <select name="role" class="form-control" id="user_type" onchange="showCompanyFields()" required="">
+            <option value="" disabled selected>Select your position</option>
+            <option value="student">Student</option>
+            <option value="company">Company</option>
+          </select>
         </div>
 
-      </div>
+        <div class="form-group mb-3" id="faculty_select">
+          <select name="faculty_id" class="form-control" id="user_faculty">
+            <option value="" disabled selected>Select your faculty</option>
+            @foreach(App\Models\Faculty::all() as $faculty)
+                <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+            @endforeach
+          </select>
+        </div>
 
+        <div class="form-group mb-3">
+          <input type="email" class="form-control" id="email_input" placeholder="Enter email" name="email" required onchange="addEmailPattern()">
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="password" class="form-control" placeholder="Enter password" name="password" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <select name="gender" class="form-control">
+            <option value="" disabled selected>Your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3 hidden" id="student_cv">
+          <label>Upload your CV</label>
+          <input type="file" name="cv" accept="pdf,doc,docx" class="form-control-file">
+        </div>
+
+        <div class="form-group mb-3">
+          <label>Upload your photo</label>
+          <input type="file" name="avatar" required class="form-control-file">
+        </div>
+
+        <div id="company_profile" class="hidden">
+          <h3 style="color: white">Company profile</h3>
+          <div class="form-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter company name" name="company_name" id="company_name">
+          </div>
+          <div class="form-group mb-3">
+            <select name="type" class="form-control" required>
+              <option value="" disabled selected>Select company type</option>
+              <option value="Company in other industry">Company in other industry</option>
+              <option value="Educational Organization">Educational Organization</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter company address" name="company_address" id="company_address">
+          </div>
+          <div class="form-group mb-3">
+            <textarea class="form-control" placeholder="Company description (max 100 words)" name="company_description" id="company_description" rows="3"></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <input type="text" class="form-control" placeholder="Instagram profile link" name="instagram" id="instagram">
+          </div>
+          <div class="form-group mb-3">
+            <label>Legal registration</label>
+            <input type="file" name="registration_certificate" class="form-control-file">
+          </div>
+          <div class="form-group mb-3">
+            <label>Lease contract</label>
+            <input type="file" name="lease_contract" class="form-control-file">
+          </div>
+          <div class="form-group mb-3">
+            <label>Optional company photo</label>
+            <input type="file" name="company_avatar" id="company_avatar" class="form-control-file">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-info">Sign up</button>
+        </div>
+
+        <div class="form-group text-center">
+          <a class="reset__link" href="{{ route('login') }}">Already have an account? Login</a>
+        </div>
+      </form>
     </div>
   </div>
-    <script>
-        window.onload = function() {
-            document.getElementById("company_profile").style.display = "none";
-            document.getElementById("user_faculty").required = true;
-        };
-        function showCompanyFields() {
-            document.getElementById("user_faculty").style.display = "none";
-            document.getElementById("user_faculty").required = false;
 
-            optionVal = document.getElementById("user_type").value;
-            var email = document.getElementById('email_input');
-            var co_name = document.getElementById('company_name');
-            var co_address = document.getElementById('company_address');
-            var co_description = document.getElementById('company_description');
-            var co_avatar = document.getElementById('company_avatar');
-            var co_cv = document.getElementById('company_cv');
+  <script>
+    function showCompanyFields() {
+        var userType = document.getElementById("user_type").value;
+        var companyProfile = document.getElementById("company_profile");
+        var studentCV = document.getElementById("student_cv");
+        var facultySelect = document.getElementById("faculty_select");
 
-            email.removeAttribute('pattern');
-            email.removeAttribute('title');
-
-            co_name.removeAttribute('required');
-            co_address.removeAttribute('required');
-            co_description.removeAttribute('required');
-            co_avatar.removeAttribute('required');
-            co_cv.removeAttribute('required');
-
-
-            if (optionVal == "company") {
-                document.getElementById("company_profile").style.display = "block";
-                co_name.setAttribute('required', '');
-                co_address.setAttribute('required', '');
-                co_description.setAttribute('required', '');
-                co_avatar.setAttribute('required', '');
-                co_cv.setAttribute('required', '');
-                document.getElementById("student_cv").style.display = "none";
-                document.getElementById("s_cv").required = false;
-            } else if (optionVal == "student") {
-                email.setAttribute('pattern', "\\d{9}@stu\\.sdu\\.edu\\.kz");
-                email.setAttribute('title', 'Please use your student email (Ex. 200103022@stu.sdu.edu.kz)')
-
-                document.getElementById("user_faculty").required = true;
-                document.getElementById("user_faculty").style.display = "";
-                document.getElementById("company_profile").style.display = "none";
-                document.getElementById("student_cv").style.display = "";
-                document.getElementById("s_cv").required = true;
-            } else {
-              document.getElementById("user_faculty").required = true;
-              document.getElementById("user_faculty").style.display = "";
-              document.getElementById("company_profile").style.display = "none";
-              document.getElementById("student_cv").style.display = "";
-                document.getElementById("s_cv").required = true;
-            }
+        if (userType === "company") {
+            companyProfile.classList.remove('hidden');
+            studentCV.classList.add('hidden');
+            facultySelect.classList.add('hidden');
+        } else if (userType === "student") {
+            companyProfile.classList.add('hidden');
+            studentCV.classList.remove('hidden');
+            facultySelect.classList.remove('hidden');
         }
+    }
 
-        function addEmailPattern() {
-
-        }
-    </script>
+    function addEmailPattern() {
+      var emailInput = document.getElementById("email_input");
+      var userType = document.getElementById("user_type").value;
+      if (userType === "student") {
+        emailInput.setAttribute('pattern', '\\d{9}@stu\\.sdu\\.edu\\.kz');
+        emailInput.setAttribute('title', 'Please use your student email (Ex. 200103022@stu.sdu.edu.kz)');
+      } else {
+        emailInput.removeAttribute('pattern');
+        emailInput.removeAttribute('title');
+      }
+    }
+  </script>
 </body>
 </html>

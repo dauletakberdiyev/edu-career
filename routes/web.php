@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/landing', function () {
+    return view('landing');
+})->name('landing');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/add/user', [App\Http\Controllers\UserController::class, 'store'])->name('user.add');
 Route::post('/update/user', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');

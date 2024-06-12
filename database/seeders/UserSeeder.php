@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 
 use App\Models\User;
 use App\Models\Company;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -47,7 +48,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Abbas',
             'lastname' => 'Bodaubekov',
             'email' => 'abbas.bodaubekov@sdu.edu.kz',
-            'password' => '$2y$10$xKBJb2O8PE33YOmUY76PU.OIxGiY9sJPk8qGfZkbm7dgl/ejf8e3O',
+            'password' => Hash::make('password'),//'$2y$10$xKBJb2O8PE33YOmUY76PU.OIxGiY9sJPk8qGfZkbm7dgl/ejf8e3O',
             'gender' => "Male",
         ]);
 
