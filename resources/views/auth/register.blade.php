@@ -111,6 +111,11 @@
           </select>
         </div>
 
+
+        <div class="form-group mb-3">
+          <a href="{{ asset('docs/cv_template.pdf') }}" target='_blank' class="">Download CV template</a>
+        </div>
+
         <div class="form-group mb-3 hidden" id="student_cv">
           <label>Upload your CV</label>
           <input type="file" name="cv" accept="pdf,doc,docx" class="form-control-file">
