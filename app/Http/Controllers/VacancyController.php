@@ -20,12 +20,13 @@ class VacancyController extends Controller
     public function index() {
         $user = Auth::user();
         if ($user->hasRole('admin'))
-            $f_id = [1,2,3,4,5,6,7,8];
+            $f_id = Faculty::all()->pluck('id');
         else if ($user->hasRole('coordinator') || $user->hasRole('student'))
             $f_id = [$user->faculty->id];
         else
             $f_id = [];
-        $vacancies = Vacancy::whereIn('faculty_id', $f_id)->orderBy('created_at', 'desc')->paginate(15);
+        $term = Term::where('status', 1)->first();
+        $vacancies = Vacancy::where('term_id', $term->id)->whereIn('faculty_id', $f_id)->orderBy('created_at', 'desc')->paginate(15);
         return view('vacancy.index')->with(['vacancies' => $vacancies]);
     }
     public function vacancy($id) {
