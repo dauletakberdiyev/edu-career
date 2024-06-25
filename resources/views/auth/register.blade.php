@@ -63,8 +63,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="d-flex justify-content-center align-items-center vh-100">
+<body style="background-image: url('{{ asset('images/login/background-login.png') }}'); background-size: cover;">
+  <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: rgba(45, 50, 112, 0.8);">
     <div class="login__page">
       <form class="form container rounded" method="POST" action="{{ route('user.add') }}" enctype="multipart/form-data">
         @csrf
@@ -113,7 +113,7 @@
 
 
         <div class="form-group mb-3 hidden" id="student_cv">
-          <a href="{{ asset('docs/cv_template.pdf') }}" target='_blank' class="">Download CV template</a>
+          <a href="https://drive.google.com/file/d/1wuLFR8nRFYAfTftRSBvwkioQ_OAclTXs/view" target='_blank' class="">Download CV template</a>
           <br>
           <label>Upload your CV</label>
           <input type="file" name="cv" accept="pdf,doc,docx" class="form-control-file">
@@ -130,7 +130,7 @@
             <input type="text" class="form-control" placeholder="Enter company name" name="company_name" id="company_name">
           </div>
           <div class="form-group mb-3">
-            <select name="type" class="form-control" required>
+            <select name="type" class="form-control" id="company_type">
               <option value="" disabled selected>Select company type</option>
               <option value="Company in other industry">Company in other industry</option>
               <option value="Educational Organization">Educational Organization</option>

@@ -16,12 +16,14 @@ class StudentController extends Controller
     public function index() {
         $user = Auth::user();
         if ($user->hasRole('admin'))
-            $f_id = [1,2,3,4,5,6,7,8];
+            $f_id = Faculty::all()->pluck('id');
         else if ($user->hasRole('coordinator') || $user->hasRole('superviser')) 
             $f_id = [$user->faculty->id];
         else
             $f_id = [];
-        $users = User::role('student')->whereIn('faculty_id', $f_id)->paginate(10);
+
+        $users = User::role('student')->whereIn('faculty_id', $f_id)->paginate(20);
+
         return view('student.manage')->with(['users' => $users]);
     }
 
@@ -53,7 +55,7 @@ class StudentController extends Controller
     public function dt() {
         $user = Auth::user();
         if ($user->hasRole('admin'))
-            $f_id = [1,2,3,4,5,6,7,8];
+            $f_id = Faculty::all()->pluck('id');
         else if ($user->hasRole('coordinator') || $user->hasRole('superviser')) 
             $f_id = [$user->faculty->id];
         else

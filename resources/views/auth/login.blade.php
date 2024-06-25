@@ -53,9 +53,9 @@
     }
   </style>
 </head>
-<body>
+<body style="background-image: url('{{ asset('images/login/background-login.png') }}'); background-size: cover;">
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="login__page">
+    <div class="login__page" style="background-color: rgba(45, 50, 112, 0.8);">
       <form class="form container p-4 rounded" method="POST" action="{{ route('login') }}">
         @csrf
         <h1 class="form__title mb-3">Login</h1>

@@ -58,7 +58,7 @@
                   <a href="{{ $user->cv }}" download >Click here to download cv</a>
                 @else
                   <span class="flex9 text-warning"> No CV </span>
-                  <a href="{{ asset('docs/cv_template.pdf') }}" target='_blank' class="">Download CV template</a>
+                  <a href="https://drive.google.com/file/d/1wuLFR8nRFYAfTftRSBvwkioQ_OAclTXs/view" target='_blank' class="">Download CV template</a>
                 @endif
               </span>
             </div>

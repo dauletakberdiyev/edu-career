@@ -37,7 +37,7 @@
 								<span class="bar"></span>
 							</div>
 							<a href="#" class="header__logo">
-							<img src="{{ asset('/images/header/edu_logo.png') }}" alt="logo_beta">
+							<img src="{{ asset('/images/header/ava_logo.png') }}" alt="logo_beta" style="height: 120px;">
 							</a>
 							<div class="menu__right">
 								<button class="menu__notification">
