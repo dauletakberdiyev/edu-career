@@ -25,7 +25,7 @@ class VacancyController extends Controller
             $f_id = [$user->faculty->id];
         else
             $f_id = [];
-        $term = Term::where('status', 1)->first();
+        $term = Term::where('active', 1)->first();
         $vacancies = Vacancy::where('term_id', $term->id)->whereIn('faculty_id', $f_id)->orderBy('created_at', 'desc')->paginate(15);
         return view('vacancy.index')->with(['vacancies' => $vacancies]);
     }
@@ -51,7 +51,7 @@ class VacancyController extends Controller
         if ($company->in_whitelist == 0) {
             return redirect()->back()->with('error', 'Company not in whitelist');
         }
-        $term = Term::where('status', 1)->first();
+        $term = Term::where('active', 1)->first();
         $vacancy = new Vacancy();
         $vacancy->title = $request->title;
         $vacancy->description = $request->description;
