@@ -37,7 +37,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">
-            <img src="{{ asset('images/header/edu_logo.png') }}" alt="EDU Career Logo" style="height: 120px;">
+            <img src="{{ asset('images/header/ava_logo.png') }}" alt="EDU Career Logo" style="height: 120px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
