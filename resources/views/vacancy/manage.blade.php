@@ -10,7 +10,7 @@
               <a class="btn btn-outline-primary" href="{{ route('vacancy.add') }}">Add vacancy</a>
               @endrole
             </div>
-
+<!--
             <form method="POST" class="search-group" action="{{ route('vacancy.search') }}">
             @csrf
               <label for="exampleInputEmail1">Search</label>
@@ -21,7 +21,7 @@
                 <button class="btn btn-outline-primary" @click.prevent="searchEmail">Search</button>
               </div>
             </form>
-
+-->
               <div class="table-outer">
                 <table class="table main-table">
                   <thead>
