@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Grade;
 use App\Models\Term;
 
 class UserController extends Controller
@@ -155,6 +156,14 @@ class UserController extends Controller
             $request->cv->storeAs('cv/' . $term->id . '/' , $user->id . '.' . $extension, 'public');
             $user->cv = Storage::url('cv/' . $term->id . '/'  . $user->id . '.' . $extension);
             $user->save();
+        }
+
+        if ($request->role == 'student') {
+            Grade::create([
+                'user_id' => $user->id,
+                'project' => json_encode([0.0, 0.0]),
+                'supervisor_mark' => json_encode([0.0, 0.0, 0.0, 0.0])
+            ]);
         }
         
         Auth::login($user);

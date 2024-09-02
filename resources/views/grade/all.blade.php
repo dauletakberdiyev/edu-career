@@ -27,7 +27,7 @@
                         <th>Email</th>
                         <th>Name</th>
                         <th>Reports</th>
-                        <th>Weeky Report</th>
+                        <th>Project Report</th>
                         <th>Internship Plan</th>
                         <th>Presentation</th>
                         <th>Supervisor mark</th>
@@ -54,22 +54,51 @@
                                 {{ $grade->report }}
                             </th>
                             <th>
-                                @role('admin|coordinator')
-                                    <input type="number" class="form-control" name="weeklyreport-{{ $grade->id }}" value="{{ $grade->weekly_report }}" onchange="updateMark({{ $grade->id }}, 'weeklyreport')">
+                                @role('admin|coordinator|company')
+                                    @if($grade->supervisor_mark == null)
+                                        <input type="number" class="form-control" name="projectmarkold-{{ $grade->id }}" value="{{ $grade->supervisor }}" onchange="updateProjectMark({{ $grade->id }})">
+                                    @else 
+                                        <table>
+                                            <tr>
+                                                @foreach(json_decode($grade->project) as $index => $mark)
+                                                    <td><label for="projectmark-{{ $index }}">Part {{ $index + 1 }}</label></td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                @foreach(json_decode($grade->project) as $index => $mark)
+                                                    <td>
+                                                        <select class="form-control" id="projectmark-{{ $index }}" name="projectmark-{{ $index }}" onchange="updateProjectMark({{ $grade->id }}, {{ $index }})">
+                                                            @for($i = 0; $i <= 15; $i += 1)
+                                                                <option value="{{ $i }}" @if($mark == $i) selected @endif>{{ $i }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        </table>
+                                    @endif      
                                 @else
-                                    {{ $grade->weekly_report }}
+                                    -1
                                 @endrole
                             </th>
                             <th>
                                 @role('admin|coordinator')
-                                    <input type="number" class="form-control" name="internshipplan-{{ $grade->id }}" value="{{ $grade->internship_plan }}" onchange="updateMark({{ $grade->id }}, 'internshipplan')">
+                                    <select class="form-control" name="internshipplan-{{ $grade->id }}" onchange="updateMark({{ $grade->id }}, 'internshipplan')">
+                                        @for($i = 0; $i <= 5; $i += 1)
+                                            <option value="{{ $i }}" @if($grade->internship_plan == $i) selected @endif>{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 @else
                                     {{ $grade->internship_plan }}
                                 @endrole
                             </th>
                             <th>
                                 @role('admin|coordinator')
-                                    <input type="number" class="form-control" name="finalmark-{{ $grade->id }}" value="{{ $grade->final }}" onchange="updateFinalMark({{ $grade->id }})">
+                                    <select class="form-control" name="finalmark-{{ $grade->id }}" onchange="updateFinalMark({{ $grade->id }})">
+                                        @for($i = 0; $i <= 10; $i += 1)
+                                            <option value="{{ $i }}" @if($grade->final == $i) selected @endif>{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 @else
                                     {{ $grade->final }}
                                 @endrole
@@ -105,7 +134,7 @@
                                 @endrole
                             </th>
                             <th>
-                                {{ $grade->report + $grade->final + $grade->supervisor }}
+                                {{ $grade->report + $grade->final + $grade->supervisor + $grade->internship_plan }}
                             </th>
                         </tr>
                     @endforeach
@@ -144,9 +173,31 @@
         });
     }
 
+    function updateProjectMark(id, index = null) {
+        if (index != null)
+            var mark = $('select[name=projectmark-' + index + ']').val();
+        else    
+            var mark = $('input[name=projectmarkold-' + id + ']').val();
+
+        $.ajax({
+            url: "{{ route('grade.updateProjectMark') }}",
+            type: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                id: id,
+                index: index,
+                mark: mark
+            },
+            success: function(data) {
+                console.log(data['success']);
+                alert('success');
+            }
+        });
+    }
+
 
     function updateFinalMark(id) {
-        var mark = $('input[name=finalmark-' + id + ']').val();
+        var mark = $('select[name=finalmark-' + id + ']').val();
         $.ajax({
             url: "{{ route('grade.updateFinalMark') }}",
             type: 'POST',
@@ -164,9 +215,9 @@
 
     function updateMark(id, type) {
         if (type == 'weeklyreport') {
-            var mark = $('input[name=weeklyreport-' + id + ']').val();
+            var mark = $('select[name=weeklyreport-' + id + ']').val();
         } else if (type == 'internshipplan') {
-            var mark = $('input[name=internshipplan-' + id + ']').val();
+            var mark = $('select[name=internshipplan-' + id + ']').val();
         }
         $.ajax({
             url: "{{ route('grade.updateMark') }}",

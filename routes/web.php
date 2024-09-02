@@ -56,6 +56,7 @@ Route::group(['prefix' => 'grades', 'middleware' => ['auth'], 'controller' => Gr
         Route::post('/updateMark', 'updateMark')->name('grade.updateMark');
     });
     Route::post('/updateSupervisorMark', 'updateSupervisorMark')->middleware('role:admin|coordinator|company')->name('grade.updateSupervisorMark');
+    Route::post('/updateProjectMark', 'updateProjectMark')->middleware('role:admin|coordinator|company')->name('grade.updateProjectMark');
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'role:admin|coordinator']], function () {

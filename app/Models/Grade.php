@@ -11,7 +11,7 @@ class Grade extends Model
 
     protected $table = 'grades';
     protected $fillable = [
-        'user_id', 'report', 'supervisor', 'final', 'supervisor_mark', 'weekly_report', 'internship_plan'
+        'user_id', 'report', 'supervisor', 'final', 'supervisor_mark', 'weekly_report', 'internship_plan', 'project'
     ];
 
     public function user()

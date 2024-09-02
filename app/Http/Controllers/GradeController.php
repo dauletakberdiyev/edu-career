@@ -12,12 +12,6 @@ class GradeController extends Controller
     public function index()
     {
         $grade = auth()->user()->grade;
-        if ($grade == null) {
-            $grade = Grade::create([
-                'user_id' => auth()->user()->id,
-                'supervisor_mark' => json_encode([0.0, 0.0, 0.0, 0.0])
-            ]);
-        }
 
         return view('grade.index')->with(['grade' => $grade]);
     }
@@ -26,13 +20,6 @@ class GradeController extends Controller
     {
         $user = User::find($id);
         $grade = $user->grade;
-
-        if ($grade == null) {
-            $grade = Grade::create([
-                'user_id' => $user->id,
-                'supervisor_mark' => json_encode([0.0, 0.0, 0.0, 0.0])
-            ]);
-        }
 
         return view('grade.index')->with(['grade' => $grade]);
     }
@@ -59,21 +46,44 @@ class GradeController extends Controller
     public function putFinall(Request $request)
     {
     }
-
+    
     public function updateSupervisorMark(Request $request)
     {
-        $grade = Grade::find($request->get('id'));
+        $grade = Grade::find($request->get('id'));        
+        $projectMarks = json_decode($grade->project, true);
         $supervisorMarks = json_decode($grade->supervisor_mark, true);
         $index = $request->get('index');
         $supervisorMarks[$index] = $request->get('mark');
     
         // Calculate the sum of supervisor marks
+        $projectSum = array_sum($projectMarks);
         $supervisorSum = array_sum($supervisorMarks);
     
         // Update supervisor mark array and supervisor column
         if ($request->get('index') != null)
             $grade->supervisor_mark = json_encode($supervisorMarks);
-        $grade->supervisor = $supervisorSum;
+        $grade->supervisor = $supervisorSum + $projectSum;
+        $grade->save();
+    
+        return response()->json(['success' => true]);
+    }
+
+    public function updateProjectMark(Request $request)
+    {
+        $grade = Grade::find($request->get('id'));
+        $projectMarks = json_decode($grade->project, true);
+        $index = $request->get('index');
+        $projectMarks[$index] = $request->get('mark');
+        $supervisorMarks = json_decode($grade->supervisor_mark, true);
+
+        // Calculate the sum of supervisor marks
+        $projectSum = array_sum($projectMarks);
+        $supervisorSum = array_sum($supervisorMarks);
+    
+        // Update supervisor mark array and supervisor column
+        if ($request->get('index') != null)
+            $grade->project = json_encode($projectMarks);
+        $grade->supervisor = $projectSum + $supervisorSum;
         $grade->save();
     
         return response()->json(['success' => true]);
