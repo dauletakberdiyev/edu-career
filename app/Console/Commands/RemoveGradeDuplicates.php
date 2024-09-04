@@ -41,13 +41,17 @@ class RemoveGradeDuplicates extends Command
         $grades = Grade::all()->groupBy('user_id');
 
         foreach ($grades as $grade) {
-            $grade->project = json_encode([0.0, 0.0]);
-            $grade->save();
             if ($grade->count() > 1) {
                 $grade->shift();
                 $grade->each->delete();
             }
             
+        }
+
+        $grades = Grade::get();
+        foreach($grades as $grade) {
+            $grade->project = json_encode([0.0, 0.0]);
+            $grade->save();
         }
 
         $this->info('Duplicates removed successfully');
