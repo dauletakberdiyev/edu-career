@@ -51,6 +51,7 @@ class RemoveGradeDuplicates extends Command
         $grades = Grade::get();
         foreach($grades as $grade) {
             $grade->project = json_encode([0.0, 0.0]);
+            $grade->supervisor_mark = json_encode([0.0, 0.0, 0.0, 0.0]);
             $grade->save();
         }
 
