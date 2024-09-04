@@ -42,7 +42,7 @@ class RemoveGradeDuplicates extends Command
 
         foreach ($grades as $grade) {
             $grade->project = json_encode([0.0, 0.0]);
-
+            $grade->save();
             if ($grade->count() > 1) {
                 $grade->shift();
                 $grade->each->delete();
