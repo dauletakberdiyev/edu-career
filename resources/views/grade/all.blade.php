@@ -58,7 +58,7 @@
                                     @if($grade->supervisor_mark == null)
                                         <input type="number" class="form-control" name="projectmarkold-{{ $grade->id }}" value="{{ $grade->supervisor }}" onchange="updateProjectMark({{ $grade->id }})">
                                     @else 
-                                        <table>
+                                        <table style="width: 140px">
                                             <tr>
                                                 @foreach(json_decode($grade->project) as $index => $mark)
                                                     <td><label for="projectmark-{{ $grade->id }}-{{ $index }}">Part {{ $index + 1 }}</label></td>
