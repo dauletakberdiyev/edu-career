@@ -61,13 +61,13 @@
                                         <table>
                                             <tr>
                                                 @foreach(json_decode($grade->project) as $index => $mark)
-                                                    <td><label for="projectmark-{{ $index }}">Part {{ $index + 1 }}</label></td>
+                                                    <td><label for="projectmark-{{ $grade->id }}-{{ $index }}">Part {{ $index + 1 }}</label></td>
                                                 @endforeach
                                             </tr>
                                             <tr>
                                                 @foreach(json_decode($grade->project) as $index => $mark)
                                                     <td>
-                                                        <select class="form-control" id="projectmark-{{ $index }}" name="projectmark-{{ $index }}" onchange="updateProjectMark({{ $grade->id }}, {{ $index }})">
+                                                        <select class="form-control" id="projectmark-{{ $grade->id }}-{{ $index }}" name="projectmark-{{ $grade->id }}-{{ $index }}" onchange="updateProjectMark({{ $grade->id }}, {{ $index }})">
                                                             @for($i = 0; $i <= 15; $i += 1)
                                                                 <option value="{{ $i }}" @if($mark == $i) selected @endif>{{ $i }}</option>
                                                             @endfor
@@ -111,13 +111,13 @@
                                         <table>
                                             <tr>
                                                 @foreach(json_decode($grade->supervisor_mark) as $index => $mark)
-                                                    <td><label for="supervisormark-{{ $index }}">Month {{ $index + 1 }}</label></td>
+                                                    <td><label for="supervisormark-{{ $grade->id }}-{{ $index }}">Month {{ $index + 1 }}</label></td>
                                                 @endforeach
                                             </tr>
                                             <tr>
                                                 @foreach(json_decode($grade->supervisor_mark) as $index => $mark)
                                                     <td>
-                                                        <select class="form-control" id="supervisormark-{{ $index }}" name="supervisormark-{{ $index }}" onchange="updateSupervisorMark({{ $grade->id }}, {{ $index }})">
+                                                        <select class="form-control" id="supervisormark-{{ $grade->id }}-{{ $index }}" name="supervisormark-{{ $grade->id }}-{{ $index }}" onchange="updateSupervisorMark({{ $grade->id }}, {{ $index }})">
                                                             <option value="0" @if($mark == 0) selected @endif>0</option>
                                                             <option value="2.5" @if($mark == 2.5) selected @endif>2.5</option>
                                                             <option value="5" @if($mark == 5) selected @endif>5</option>
@@ -153,9 +153,9 @@
 
     function updateSupervisorMark(id, index = null) {
         if (index != null)
-            var mark = $('select[name=supervisormark-' + index + ']').val();
+            var mark = $('select[name=supervisormark-' + id + '-' + index + ']').val();
         else    
-            var mark = $('input[name=supervisormarkold-' + id + ']').val();
+            var mark = $('input[name=supervisormarkold-' + id + '-' + id + ']').val();
 
         $.ajax({
             url: "{{ route('grade.updateSupervisorMark') }}",
@@ -175,7 +175,7 @@
 
     function updateProjectMark(id, index = null) {
         if (index != null)
-            var mark = $('select[name=projectmark-' + index + ']').val();
+            var mark = $('select[name=projectmark-' + id + '-' + index + ']').val();
         else    
             var mark = $('input[name=projectmarkold-' + id + ']').val();
 
