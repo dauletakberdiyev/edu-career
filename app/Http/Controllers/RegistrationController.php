@@ -104,13 +104,6 @@ class RegistrationController extends Controller
             'company_id' => $request->get('company_id'),
         ]);
 
-        Grade::create([
-            'user_id' => $request->get('user_id'),
-            'company_id' => $request->get('company_id'),
-            'supervisor_mark' => json_encode([0.0, 0.0, 0.0, 0.0]),
-            'final_mark' => 0.0,
-        ]);
-
         return redirect()->back();
     }
 
