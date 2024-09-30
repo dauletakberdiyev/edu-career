@@ -82,6 +82,19 @@ class UserController extends Controller
             $user->avatar = Storage::url('avatars/' . $user->id . '.' . $extension);
             $user->save();
         }
+
+        if ($request->role('student') && $user->grade == null) {
+            $user->grade()->create([
+                'user_id' => $user->id,
+                'report' => 0,
+                'supervisor' => 0,
+                'final' => 0,
+                'supervisor_mark' => json_encode([0.0, 0.0, 0.0, 0.0]),
+                'weekly_report' => 0,
+                'internship_plan' => 0,
+                'project' => json_encode([0.0, 0.0])
+            ]);
+        }
         return response(new UserResource($user), 201);
     }
     
